@@ -1,0 +1,872 @@
+[
+    {
+      "name": "P-1-Wilberto Torres",
+      "desc": "",
+      "x": "-65,69052",
+      "y": "-22,71579"
+    },
+    {
+      "name": "Li.JM.RW-3",
+      "desc": "Mina La Ilusión\nPozo de Bombeo",
+      "x": "-67,02135",
+      "y": "-23,27668"
+    },
+    {
+      "name": "Li.JM.RW-2",
+      "desc": "Mina La Ilusión\nPozo de Bombeo",
+      "x": "-67,04659",
+      "y": "-23,27664"
+    },
+    {
+      "name": "Li.JM.RW-1",
+      "desc": "Mina La Ilusión\nPozo de Bombeo",
+      "x": "-67,02061",
+      "y": "-23,26398"
+    },
+    {
+      "name": "Li.JM.FW-1",
+      "desc": "Mina La Ilusión\nPozo de Agua Dulce",
+      "x": "-67,03038",
+      "y": "-23,25297"
+    },
+    {
+      "name": "DDH5M14",
+      "desc": "MASA XIV",
+      "x": "-66,56908",
+      "y": "-23,2444"
+    },
+    {
+      "name": "DDH4M14",
+      "desc": "MASA XIV",
+      "x": "-66,56916",
+      "y": "-23,2353"
+    },
+    {
+      "name": "DDH3M14",
+      "desc": "MASA XIV",
+      "x": "-66,56907",
+      "y": "-23,21602"
+    },
+    {
+      "name": "DDH2M14",
+      "desc": "MASDA XIV",
+      "x": "-66,56926",
+      "y": "-23,204"
+    },
+    {
+      "name": "DDH1M14",
+      "desc": "MASA XIV",
+      "x": "-66,56912",
+      "y": "-23,22653"
+    },
+    {
+      "name": "DDH6M13",
+      "desc": "MASA XIII",
+      "x": "-66,57378",
+      "y": "-23,2848"
+    },
+    {
+      "name": "DDH5M13",
+      "desc": "MASA XIII",
+      "x": "-66,56936",
+      "y": "-23,2765"
+    },
+    {
+      "name": "DDH4M13",
+      "desc": "MASA XIII",
+      "x": "-66,57372",
+      "y": "-23,27123"
+    },
+    {
+      "name": "DDH3M13",
+      "desc": "MASA XIII",
+      "x": "-66,56964",
+      "y": "-23,26213"
+    },
+    {
+      "name": "DDH2M13",
+      "desc": "MASA XIlI",
+      "x": "-66,57349",
+      "y": "-23,25782"
+    },
+    {
+      "name": "DDH1M13",
+      "desc": "MASA XIlI",
+      "x": "-66,56958",
+      "y": "-23,24887"
+    },
+    {
+      "name": "Finca Gerónimo Calisaya",
+      "desc": "S/ruta 70 camino a Orosmayo",
+      "x": "-66,06555",
+      "y": "-22,44944"
+    },
+    {
+      "name": "Mocoraite- Puesto del Marqués-Cochinoca",
+      "desc": "",
+      "x": "-65,74777",
+      "y": "-22,49055"
+    },
+    {
+      "name": "Punta del Agua-Cangrejillos- Yavi",
+      "desc": "Estado Provincial",
+      "x": "-65,63694",
+      "y": "-22,43083"
+    },
+    {
+      "name": "MW-16A",
+      "desc": "Piezométrico-Pirquitas",
+      "x": "-66,53519",
+      "y": "-22,68646"
+    },
+    {
+      "name": "MW-9B",
+      "desc": "Piezómetro-Pirquitas",
+      "x": "-66,47147",
+      "y": "-22,69393"
+    },
+    {
+      "name": "MW -10B",
+      "desc": "Piezómetro-Pirquitas",
+      "x": "-66,47183",
+      "y": "-22,69459"
+    },
+    {
+      "name": "MW -10A",
+      "desc": "Piezómetro-Pirquitas",
+      "x": "-66,47182",
+      "y": "-22,69455"
+    },
+    {
+      "name": "MW-5A",
+      "desc": "Piezómetro-Pirquitas",
+      "x": "-66,44107",
+      "y": "-22,72276"
+    },
+    {
+      "name": "MW-2A",
+      "desc": "Piezómetro-Pirquitas",
+      "x": "-66,5244",
+      "y": "-22,68901"
+    },
+    {
+      "name": "MW-1B",
+      "desc": "Piezómetro-Pirquitas",
+      "x": "-66,55167",
+      "y": "-22,6931"
+    },
+    {
+      "name": "MW-1A",
+      "desc": "Piezometro-Pirquitas",
+      "x": "-66,5519",
+      "y": "-22,69381"
+    },
+    {
+      "name": "Pozo Charca, Elena",
+      "desc": "Pozo excavado a mano",
+      "x": "-65,56916",
+      "y": "-22,33"
+    },
+    {
+      "name": "Comunitario",
+      "desc": "Pozo excavado a mano - marg. der. del R. Relave",
+      "x": "-65,50777",
+      "y": "-22,30361"
+    },
+    {
+      "name": "Pozo de molino",
+      "desc": "",
+      "x": "-65,76055",
+      "y": "-22,41916"
+    },
+    {
+      "name": "Pozo flias Gaspar - Cari",
+      "desc": "Paraje Condor Huasi",
+      "x": "-65,7175",
+      "y": "-22,1025"
+    },
+    {
+      "name": "Pan de Azucar Mina",
+      "desc": "Agua Potable",
+      "x": "-66,05312",
+      "y": "-22,63247"
+    },
+    {
+      "name": "Carahuasi",
+      "desc": "Agua Potable",
+      "x": "-65,95388",
+      "y": "-22,53916"
+    },
+    {
+      "name": "Pozuelo Escuela",
+      "desc": "Agua Potable",
+      "x": "-65,96138",
+      "y": "-22,4325"
+    },
+    {
+      "name": "Santo Domingo",
+      "desc": "Agua Potable",
+      "x": "-66,2238",
+      "y": "-22,5411"
+    },
+    {
+      "name": "Rinconada",
+      "desc": "Agua Potable",
+      "x": "-66,1716",
+      "y": "-22,4316"
+    },
+    {
+      "name": "Puesto Grande",
+      "desc": "Agua Potable",
+      "x": "-65,9511",
+      "y": "-22,04916"
+    },
+    {
+      "name": "Cieneguilla",
+      "desc": "Agua Potable",
+      "x": "-65,863",
+      "y": "-22,10083"
+    },
+    {
+      "name": "Piscuno",
+      "desc": "Agua Potable",
+      "x": "-65,94416",
+      "y": "-21,93277"
+    },
+    {
+      "name": "Pumahuasi",
+      "desc": "Agua Potable",
+      "x": "-65,6761",
+      "y": "-22,28805"
+    },
+    {
+      "name": "La Curva (Puesto de Marquez)",
+      "desc": "Agua Potable",
+      "x": "-65,725",
+      "y": "-22,4705"
+    },
+    {
+      "name": "Pueblo Viejo( Puesto de Marquez)",
+      "desc": "Agua Potable",
+      "x": "-65,641",
+      "y": "-22,4938"
+    },
+    {
+      "name": "Puesto de Marquez",
+      "desc": "Agua Potable",
+      "x": "-65,7025",
+      "y": "-22,53472"
+    },
+    {
+      "name": "N°3 (Abra Pampa)",
+      "desc": "Agua Potable",
+      "x": "-65,6922",
+      "y": "-22,7266"
+    },
+    {
+      "name": "N°4 (Abra Pampa)",
+      "desc": "Agua Potable",
+      "x": "-65,68694",
+      "y": "-22,72333"
+    },
+    {
+      "name": "N°5 (Abra Pampa)",
+      "desc": "Agua Potable",
+      "x": "-65,6916",
+      "y": "-22,7094"
+    },
+    {
+      "name": "N°6",
+      "desc": "Agua Potable",
+      "x": "-65,6827",
+      "y": "-22,71805"
+    },
+    {
+      "name": "Pasaje",
+      "desc": "Agua Potable",
+      "x": "-65,7994",
+      "y": "-22,78027"
+    },
+    {
+      "name": "Miraflores",
+      "desc": "Agua Potable",
+      "x": "-65,871",
+      "y": "-22,83027"
+    },
+    {
+      "name": "Sayate",
+      "desc": "Agua Potable",
+      "x": "-65,19166",
+      "y": "-22,88388"
+    },
+    {
+      "name": "Cochagaste",
+      "desc": "Agua Potable",
+      "x": "-65,9155",
+      "y": "-23,01861"
+    },
+    {
+      "name": "Agua Caliente",
+      "desc": "Agua Potable",
+      "x": "-65,84972",
+      "y": "-23,0683"
+    },
+    {
+      "name": "DH18EU012",
+      "desc": "Mina Julio II-Agua Ind",
+      "x": "-66,20239",
+      "y": "-21,9595"
+    },
+    {
+      "name": "DH18EU011",
+      "desc": "Mina Julio II-Agua Ind",
+      "x": "-66,20398",
+      "y": "-21,96124"
+    },
+    {
+      "name": "DH18EU010",
+      "desc": "Mina Julio II_agua Ind",
+      "x": "-66,20616",
+      "y": "-21,96311"
+    },
+    {
+      "name": "DH18EU009",
+      "desc": "Mina Eureka-Agua Ind",
+      "x": "-66,20442",
+      "y": "-21,95517"
+    },
+    {
+      "name": "DH18EU008",
+      "desc": "Mina Eureka-Agua Ind",
+      "x": "-66,20118",
+      "y": "-21,95626"
+    },
+    {
+      "name": "DH18EU006",
+      "desc": "Mina Julio I-Agua ind",
+      "x": "-66,20283",
+      "y": "-21,94861"
+    },
+    {
+      "name": "DH18EU003",
+      "desc": "Mina Julio I-Agua Ind",
+      "x": "-66,20395",
+      "y": "-21,95179"
+    },
+    {
+      "name": "DH18EU002",
+      "desc": "Mina Eureka-Agua Ind",
+      "x": "-66,20019",
+      "y": "-21,95277"
+    },
+    {
+      "name": "DH18EU001",
+      "desc": "Mina Eureka-Agua Ind",
+      "x": "-66,19628",
+      "y": "-21,95307"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "Pre-existente",
+      "x": "-66,64783",
+      "y": "-23,25"
+    },
+    {
+      "name": "Juana Cala",
+      "desc": "",
+      "x": "-65,6975",
+      "y": "-22,57139"
+    },
+    {
+      "name": "Pedro Ramos",
+      "desc": "",
+      "x": "-65,69739",
+      "y": "-22,57353"
+    },
+    {
+      "name": "Mariano Vilca",
+      "desc": "",
+      "x": "-65,70859",
+      "y": "-22,59078"
+    },
+    {
+      "name": "Mariano Vilca",
+      "desc": "",
+      "x": "-65,69775",
+      "y": "-22,58941"
+    },
+    {
+      "name": "Justina Ramos",
+      "desc": "",
+      "x": "-65,6988",
+      "y": "-22,63328"
+    },
+    {
+      "name": "Victor Lamas",
+      "desc": "",
+      "x": "-65,69884",
+      "y": "-22,636"
+    },
+    {
+      "name": "Jorge Cruz",
+      "desc": "",
+      "x": "-65,70325",
+      "y": "-22,64945"
+    },
+    {
+      "name": "Jorge Cruz",
+      "desc": "",
+      "x": "-65,71738",
+      "y": "-22,64277"
+    },
+    {
+      "name": "Sosa",
+      "desc": "",
+      "x": "-65,7038",
+      "y": "-22,65728"
+    },
+    {
+      "name": "Eufemia Mamani",
+      "desc": "",
+      "x": "-65,69364",
+      "y": "-22,55725"
+    },
+    {
+      "name": "Puesto Abandonado",
+      "desc": "",
+      "x": "-65,69116",
+      "y": "-22,55859"
+    },
+    {
+      "name": "Casiano Ramos",
+      "desc": "Pozo Flia Casiano Ramos. NF:3,81 mbbp",
+      "x": "-65,68489",
+      "y": "-22,56469"
+    },
+    {
+      "name": "Calixto Martinez",
+      "desc": "",
+      "x": "-65,68545",
+      "y": "-22,57511"
+    },
+    {
+      "name": "Maribel Ramos",
+      "desc": "",
+      "x": "-65,68489",
+      "y": "-22,57681"
+    },
+    {
+      "name": "Atanasio",
+      "desc": "",
+      "x": "-65,68533",
+      "y": "-22,58422"
+    },
+    {
+      "name": "Pascuala Gaspar",
+      "desc": "",
+      "x": "-65,68639",
+      "y": "-22,58795"
+    },
+    {
+      "name": "Angel Gaspar",
+      "desc": "",
+      "x": "-65,68606",
+      "y": "-22,59306"
+    },
+    {
+      "name": "Teodora Cañares",
+      "desc": "",
+      "x": "-65,68595",
+      "y": "-22,59969"
+    },
+    {
+      "name": "Azucena Ramos",
+      "desc": "",
+      "x": "-65,68666",
+      "y": "-22,60211"
+    },
+    {
+      "name": "Choque",
+      "desc": "",
+      "x": "-65,69623",
+      "y": "-22,60148"
+    },
+    {
+      "name": "Se Desconoce",
+      "desc": "",
+      "x": "-65,68681",
+      "y": "-22,61342"
+    },
+    {
+      "name": "Aide Dionisio",
+      "desc": "",
+      "x": "-65,69861",
+      "y": "-22,66111"
+    },
+    {
+      "name": "Enrique Lamas",
+      "desc": "",
+      "x": "-65,7058",
+      "y": "-22,6809"
+    },
+    {
+      "name": "Santiago Figueroa-Toma de Río",
+      "desc": "",
+      "x": "-65,62083",
+      "y": "-22,73767"
+    },
+    {
+      "name": "Pascuala Gaspar",
+      "desc": "",
+      "x": "-65,69647",
+      "y": "-22,56225"
+    },
+    {
+      "name": "Mina Payo II",
+      "desc": "",
+      "x": "-66,64777",
+      "y": "-23,24673"
+    },
+    {
+      "name": "PW-01A",
+      "desc": "Mina Chinchillas-MineraValle del Cura",
+      "x": "-66,26277",
+      "y": "-22,50361"
+    },
+    {
+      "name": "A perforar 2021",
+      "desc": "MINA PROVIDENCIA (Ag - Cu) - HANAQ ARGENTINA S.A.",
+      "x": "-66,7971",
+      "y": "-23,25999"
+    },
+    {
+      "name": "DPR-037",
+      "desc": "MINA PROVIDENCIA (Ag - Cu) - HANAQ ARGENTINA S.A.",
+      "x": "-66,8",
+      "y": "-23,25194"
+    },
+    {
+      "name": "DPR-022",
+      "desc": "MINA PROVIDENCIA (Ag - Cu) - HANAQ ARGENTINA S.A.",
+      "x": "-66,80222",
+      "y": "-23,25028"
+    },
+    {
+      "name": "DPR-014",
+      "desc": "MINA PROVIDENCIA (Ag - Cu) - HANAQ ARGENTINA S.A.",
+      "x": "-66,7991",
+      "y": "-23,25055"
+    },
+    {
+      "name": "WSE-01",
+      "desc": "SDJ-Agua Ind",
+      "x": "-66,64748",
+      "y": "-23,26836"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "SDJ-Agua Ind 2021",
+      "x": "-66,65265",
+      "y": "-23,26224"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "SDJ- Agua Ind",
+      "x": "-66,65745",
+      "y": "-23,27146"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "SDJ-Agua Ind",
+      "x": "-66,64776",
+      "y": "-23,27922"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "SDJ-Agua Ind 2021",
+      "x": "-66,63654",
+      "y": "-23,27056"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "SDJ-Agua Ind 2021",
+      "x": "-66,63813",
+      "y": "-23,28452"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "SDJ-Agua Ind 2021",
+      "x": "-66,6381",
+      "y": "-23,2829"
+    },
+    {
+      "name": "EXAR-2",
+      "desc": "EXAR-Agua Ind 2021",
+      "x": "-66,635",
+      "y": "-23,27279"
+    },
+    {
+      "name": "EXAR-1",
+      "desc": "Exar-Agua Ind 2021",
+      "x": "-66,63306",
+      "y": "-23,26395"
+    },
+    {
+      "name": "EXAR-3",
+      "desc": "EXAR-Agua Ind 2021",
+      "x": "-66,6483",
+      "y": "-23,28099"
+    },
+    {
+      "name": "EXAR-5",
+      "desc": "EXAR-Agua Ind 2021",
+      "x": "-66,62868",
+      "y": "-23,28141"
+    },
+    {
+      "name": "EXAR-6",
+      "desc": "EXAR-Agua Ind 2021",
+      "x": "-66,64334",
+      "y": "-23,26706"
+    },
+    {
+      "name": "1 Dcción Hidráulica de Jujuy",
+      "desc": "El Morro-Agua ind",
+      "x": "-66,11806",
+      "y": "-22,47805"
+    },
+    {
+      "name": "2 Dcción de Hidráulica de Jujuy",
+      "desc": "Pozuelos-Agua Ind",
+      "x": "-65,94166",
+      "y": "-22,37916"
+    },
+    {
+      "name": "9 Dcción de Hidráulica de Jujuy",
+      "desc": "Puesto Chico-Agua Ind",
+      "x": "-65,97278",
+      "y": "-22,10555"
+    },
+    {
+      "name": "10 Dcción de Hidráulica de Jujuy",
+      "desc": "Casira-Agua Ind",
+      "x": "-65,91111",
+      "y": "-22,97306"
+    },
+    {
+      "name": "11 Dirección de Hidráulica de Jujuy",
+      "desc": "Cieneguillas-Agua Ind",
+      "x": "-65,91194",
+      "y": "-22,20861"
+    },
+    {
+      "name": "Escuela N° 56",
+      "desc": "Tusaquillas",
+      "x": "-65,98924",
+      "y": "-23,19001"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "Barrancas",
+      "x": "-66,03733",
+      "y": "-23,1748"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "Santa Ana",
+      "x": "-66,02376",
+      "y": "-23,12924"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "Pan de Azúcar",
+      "x": "-66,06567",
+      "y": "-22,56765"
+    },
+    {
+      "name": "Pozo N°12",
+      "desc": "Yoscaba-S/ruta N° 7",
+      "x": "-66,05067",
+      "y": "-22,30102"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "Puesto Chico",
+      "x": "-65,97297",
+      "y": "-22,10566"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "LLamería",
+      "x": "-65,93975",
+      "y": "-22,05822"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "Centro de rendimiento deportivo de altura-La Quiaca",
+      "x": "-65,60194",
+      "y": "-22,11552"
+    },
+    {
+      "name": "Sin Nombre",
+      "desc": "Viviendas-La Quiaca",
+      "x": "-65,58593",
+      "y": "-22,11552"
+    },
+    {
+      "name": "Pozo N° 7",
+      "desc": "Lumara",
+      "x": "-65,71276",
+      "y": "-22,82143"
+    },
+    {
+      "name": "Pozo N° 6",
+      "desc": "finca Félix Vilte-Lumara",
+      "x": "-65,72861",
+      "y": "-22,83212"
+    },
+    {
+      "name": "Pozo N° 5",
+      "desc": "Agua Chica",
+      "x": "-65,77385",
+      "y": "-22,88086"
+    },
+    {
+      "name": "Pozo N° 4",
+      "desc": "Abralaite",
+      "x": "-65,82337",
+      "y": "-23,16653"
+    },
+    {
+      "name": "Pozo N° 3",
+      "desc": "Agua de Castilla",
+      "x": "-65,8351",
+      "y": "-23,21959"
+    },
+    {
+      "name": "Pozo Escuela",
+      "desc": "Paraje Miraflores",
+      "x": "-65,8739",
+      "y": "-22,83028"
+    },
+    {
+      "name": "Esc. N° 340-Localidad Ciénega Grande",
+      "desc": "",
+      "x": "-66,07333",
+      "y": "-22,46416"
+    },
+    {
+      "name": "Paraje Llamería",
+      "desc": "Agua Potable S.A.",
+      "x": "-65,68444",
+      "y": "-22,56666"
+    },
+    {
+      "name": "Felipa Colque",
+      "desc": "Agua Potable S.A.",
+      "x": "-65,95611",
+      "y": "-22,43277"
+    },
+    {
+      "name": "Pozo Río Rosario",
+      "desc": "Mina Masa 12-13 y 14",
+      "x": "-66,61693",
+      "y": "-23,17671"
+    },
+    {
+      "name": "Pozo Laguna Turi Lari",
+      "desc": "Mina Masa 12-13 y 14",
+      "x": "-66,63045",
+      "y": "-23,13316"
+    },
+    {
+      "name": "Pozo Armeya, Clemente",
+      "desc": "Pozo excavado a mano - marg. izq. del río Relave",
+      "x": "-65,515",
+      "y": "-22,29694"
+    },
+    {
+      "name": "Pozo Barrios - Dos Morros",
+      "desc": "Aprovechamiento comunitario",
+      "x": "-65,57611",
+      "y": "-22,31111"
+    },
+    {
+      "name": "Pozo Ramón Vilca",
+      "desc": "Pozo excavado a mano – marg. der. del río Dos Morros",
+      "x": "-65,57472",
+      "y": "-22,32055"
+    },
+    {
+      "name": "Pozo Flores, Francisco",
+      "desc": "Pozo excavado a mano",
+      "x": "-65,57277",
+      "y": "-22,32638"
+    },
+    {
+      "name": "Finca Flia Liquín",
+      "desc": "",
+      "x": "-65,89027",
+      "y": "-22,85027"
+    },
+    {
+      "name": "Finca Familia Mendoza",
+      "desc": "",
+      "x": "-65,79194",
+      "y": "-22,90472"
+    },
+    {
+      "name": "Dirección de Ganadería, Estado Provincial",
+      "desc": "",
+      "x": "-65,70361",
+      "y": "-22,38527"
+    },
+    {
+      "name": "Finca Quipildor",
+      "desc": "Sobre Ruta Provincial N° 11",
+      "x": "-66,02472",
+      "y": "-23,04638"
+    },
+    {
+      "name": "MW-03",
+      "desc": "Minera Valle del Cura S.A.",
+      "x": "-66,24972",
+      "y": "-22,50611"
+    },
+    {
+      "name": "Gerónimo",
+      "desc": "",
+      "x": "-66,0666",
+      "y": "-22,45049"
+    },
+    {
+      "name": "Familia Mamani",
+      "desc": "",
+      "x": "-66,04963",
+      "y": "-22,57993"
+    },
+    {
+      "name": "P-8 - estación del ferrocarril",
+      "desc": "",
+      "x": "-65,69623",
+      "y": "-22,72341"
+    },
+    {
+      "name": "P-14  familia Condorí",
+      "desc": "",
+      "x": "-65,69215",
+      "y": "-22,72105"
+    },
+    {
+      "name": "P-32  Universidad de San Juan",
+      "desc": "",
+      "x": "-65,69872",
+      "y": "-22,71475"
+    },
+    {
+      "name": "P-33 familia Zerpa",
+      "desc": "",
+      "x": "-65,69913",
+      "y": "-22,71773"
+    }
+  ]
