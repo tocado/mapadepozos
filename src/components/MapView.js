@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import React, { useState, useEffect } from "react";
+import { LayersControl, MapContainer, TileLayer } from "react-leaflet";
 import data from "../assets/srcSalta.json";
 import Markers from "./Markers";
-
+import { GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import * as topojson from "topojson-client";
 
 const MapView = (props) => {
+  const [cuencas, setCuencas] = useState({})
+
   const [state] = useState({
     currentLocation: { lat: -38.5094661, lng: -73.8996827 },
     zoom: 4,
@@ -14,23 +17,127 @@ const MapView = (props) => {
   let markers = data.map(function (o) {
     return {
       description: o.desc,
-      name: o.name,
+      name: <>
+        <h5>o.name</h5>
+        <table>
+          <tr>
+            <th>
+              Nombre
+            </th>
+            <td>
+              {o.name}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Caudal Medio
+            </th>
+            <td>
+              {o.Caudalmedio || '-'}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Profundiad
+            </th>
+            <td>
+              {o.Profundidad || '-'}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              NivelDinamico
+            </th>
+            <td>
+              {o.NivelDinamico || '-'}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              NivelEstatico
+            </th>
+            <td>
+              {o.NivelEstatico || '-'}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Uso
+            </th>
+            <td>
+              {o.Uso || '-'}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Provincia
+            </th>
+            <td>
+              {o.Provincia || '-'}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Fuente
+            </th>
+            <td>
+              {o.DuenioDelDato || '-'}
+            </td>
+          </tr>
+        </table>
+      </>,
       geometry: [
-        o.y.replace(',','.'),
-        o.x.replace(',','.')
+        o.y.replace(',', '.'),
+        o.x.replace(',', '.')
       ]
     }
   })
-  console.log(markers)
+
+  const onEach = (feature, layer) => {
+    let PopupContent = "<pre>" +
+      JSON.stringify(feature.properties, null, " ").replace(/[{}"]/g, "") +
+      "</pre>";
+    layer.bindPopup(PopupContent)
+  }
+  useEffect(() => {
+    let opt = {
+      method: 'GET',
+    }
+    // options = {
+    // method: 'POST',
+    // headers: headers,
+    // body: JSON.stringify({
+    // securityEnabledOnly: true,
+    // }),
+    fetch('http://localhost:3000/mapadepozos/cuencastopo.json', opt).then((res) => {
+      res.json().then((jsonCuencas) => {
+        debugger
+//        setCuencas(jsonCuencas)
+        setCuencas(topojson.feature(jsonCuencas,jsonCuencas.objects.cuencas))
+        document.getElementById('preloader').style.display = 'none'
+      })
+    })
+  }, [])
+
   return (
     <MapContainer center={state.currentLocation} zoom={state.zoom}>
       <TileLayer
         url="https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Markers markers={markers} />
+      <LayersControl position="topright">
+        <LayersControl.Overlay name="Pozos de Agua">
+          <Markers markers={markers} />
+        </LayersControl.Overlay>
+          <LayersControl.Overlay name="Cuencas de Agua">
+          {Object.keys(cuencas).length > 1 && (
+            <GeoJSON data={cuencas} onEachFeature={onEach} />
+          )}
+          </LayersControl.Overlay>
+      </LayersControl>
     </MapContainer>
   );
 };
-
+// comando para reducir
+// /c/Users/harkonnen/Documents/mapapozos/mapadepozos/node_modules/topojson/node_modules/topojson-server/bin/geo2topo -q 100000 src/components/cuencas.json >public/cuencastopo.json
 export default MapView;
