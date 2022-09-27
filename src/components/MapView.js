@@ -109,7 +109,7 @@ const MapView = (props) => {
     // body: JSON.stringify({
     // securityEnabledOnly: true,
     // }),
-    fetch('http://localhost:3000/mapadepozos/cuencastopo.json', opt).then((res) => {
+    fetch('cuencastopo.json', opt).then((res) => {
       res.json().then((jsonCuencas) => {
         debugger
 //        setCuencas(jsonCuencas)
