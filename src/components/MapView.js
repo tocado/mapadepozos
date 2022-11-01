@@ -121,9 +121,7 @@ const MapView = (props) => {
 
   return (
     <>
-      <MapContainer center={layerStatus.posicion} zoom={layerStatus.zoom} whenReady={(map) => {
-        alert("loaded")
-      }}>
+      <MapContainer center={layerStatus.posicion} zoom={layerStatus.zoom}>
         <Eventos layerStatus={layerStatus}/>
         <TileLayer
           url="https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png"
