@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { LayersControl, MapContainer, TileLayer } from "react-leaflet";
+import { useMap } from 'react-leaflet/hooks'
 import data from "../assets/srcSalta.json";
 import Markers from "./Markers";
 import { GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import * as topojson from "topojson-client";
 
+const Eventos = (props) => {
+  let {layerStatus} = props
+  const map = useMap()
+  //console.table(layerStatus)
+  map.flyTo(layerStatus.posicion, layerStatus.zoom, {} )
+  return null
+}
 const MapView = (props) => {
   const [cuencas, setCuencas] = useState({})
-
-  const [state] = useState({
-    currentLocation: { lat: -38.5094661, lng: -73.8996827 },
-    zoom: 4,
-    data: data,
-  });
+  const { layerStatus } = props;
   let markers = data.map(function (o) {
     return {
       description: o.desc,
@@ -111,31 +114,33 @@ const MapView = (props) => {
     // }),
     fetch('cuencastopo.json', opt).then((res) => {
       res.json().then((jsonCuencas) => {
-        debugger
-//        setCuencas(jsonCuencas)
-        setCuencas(topojson.feature(jsonCuencas,jsonCuencas.objects.cuencas))
-        document.getElementById('preloader').style.display = 'none'
+        setCuencas(topojson.feature(jsonCuencas, jsonCuencas.objects.cuencas))
       })
     })
   }, [])
 
   return (
-    <MapContainer center={state.currentLocation} zoom={state.zoom}>
-      <TileLayer
-        url="https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png"
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
-      <LayersControl position="topright">
-        <LayersControl.Overlay name="Pozos de Agua">
-          <Markers markers={markers} />
-        </LayersControl.Overlay>
-          <LayersControl.Overlay name="Cuencas de Agua">
-          {Object.keys(cuencas).length > 1 && (
-            <GeoJSON data={cuencas} onEachFeature={onEach} />
-          )}
+    <>
+      <MapContainer center={layerStatus.posicion} zoom={layerStatus.zoom} whenReady={(map) => {
+        alert("loaded")
+      }}>
+        <Eventos layerStatus={layerStatus}/>
+        <TileLayer
+          url="https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <LayersControl position="topright">
+          <LayersControl.Overlay name="Pozos de Agua" checked={layerStatus.pozos || false}>
+            <Markers markers={markers} />
           </LayersControl.Overlay>
-      </LayersControl>
-    </MapContainer>
+          <LayersControl.Overlay name="Cuencas de Agua" checked={layerStatus.cuencas || false}>
+            {Object.keys(cuencas).length > 1 && (
+              <GeoJSON data={cuencas} onEachFeature={onEach} />
+            )}
+          </LayersControl.Overlay>
+        </LayersControl>
+      </MapContainer>
+    </>
   );
 };
 // comando para reducir

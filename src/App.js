@@ -1,9 +1,9 @@
-import MapView from "./components/MapView";
+import Layout from "./components/Layout";
 import './App.css'
 
 function App() {
   return (
-    <MapView />
+    <Layout />
   );
 }
 
