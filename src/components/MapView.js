@@ -10,12 +10,18 @@ import * as topojson from "topojson-client";
 const Eventos = (props) => {
   let {layerStatus} = props
   const map = useMap()
-  //console.table(layerStatus)
-  map.flyTo(layerStatus.posicion, layerStatus.zoom, {} )
+  useEffect(() => {
+    map.setView(layerStatus.posicion, layerStatus.zoom);
+  }, [layerStatus.posicion]);
+  //console.table(map.getCenter())
+  // map.setPosition(layerStatus.posicion, layerStatus.zoom)
+  // map.flyTo(layerStatus.posicion, layerStatus.zoom, {'duration':0.25} )
   return null
 }
 const MapView = (props) => {
   const [cuencas, setCuencas] = useState({})
+  const [provincias, setProvincias] = useState({})
+
   const { layerStatus } = props;
   let markers = data.map(function (o) {
     return {
@@ -117,12 +123,17 @@ const MapView = (props) => {
         setCuencas(topojson.feature(jsonCuencas, jsonCuencas.objects.cuencas))
       })
     })
+    fetch('provincias.json', opt).then((res) => {
+      res.json().then((jsonProvincias) => {
+        setProvincias(jsonProvincias)
+      })
+    })
   }, [])
 
   return (
     <>
       <MapContainer center={layerStatus.posicion} zoom={layerStatus.zoom}>
-        <Eventos layerStatus={layerStatus}/>
+        <Eventos layerStatus={layerStatus} />
         <TileLayer
           url="https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -131,9 +142,16 @@ const MapView = (props) => {
           <LayersControl.Overlay name="Pozos de Agua" checked={layerStatus.pozos || false}>
             <Markers markers={markers} />
           </LayersControl.Overlay>
+
           <LayersControl.Overlay name="Cuencas de Agua" checked={layerStatus.cuencas || false}>
             {Object.keys(cuencas).length > 1 && (
               <GeoJSON data={cuencas} onEachFeature={onEach} />
+            )}
+          </LayersControl.Overlay>
+
+          <LayersControl.Overlay name="Provincias" checked={true}>
+            {Object.keys(provincias).length > 1 && (
+              <GeoJSON data={provincias} />
             )}
           </LayersControl.Overlay>
         </LayersControl>

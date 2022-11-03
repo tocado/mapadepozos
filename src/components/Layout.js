@@ -22,6 +22,33 @@ import MyLocationIcon from '@mui/icons-material/MyLocation';
 const drawerWidth = 240;
 
 function Layout(props) {
+    const provincias = [
+        { nombre: "CABA", pos: [-34.6038, -58.4253], z: 12 },
+        { nombre: "Buenos Aires", pos: [-37.3003, -59.2601], z: 7 },
+        { nombre: "Catamarca", pos: [-27.1862, -67.3577], z: 7 },
+        { nombre: "Chaco", pos: [-25.8493, -60.6119], z: 7 },
+        { nombre: "Chubut", pos: [-44.0244, -68.3770], z: 7 },
+        { nombre: "Córdoba", pos: [-32.3614, -63.1267], z: 7 },
+        { nombre: "Corrientes", pos: [-28.9505, -57.7877], z: 8 },
+        { nombre: "Entre Rios", pos: [-31.9894, -59.0179], z: 8 },
+        { nombre: "Formosa", pos: [-24.5971, -60.0077], z: 7 },
+        { nombre: "Jujuy", pos: [-23.3120, -65.6102], z: 8 },
+        { nombre: "La Pampa", pos: [-37.2828, -65.4783], z: 7 },
+        { nombre: "La Rioja", pos: [-29.4970, -67.4335], z: 7 },
+        { nombre: "Mendoza", pos: [-34.6694, -69.0591], z: 7 },
+        { nombre: "Misiones", pos: [-26.8045,-54.5046], z: 8 },
+        { nombre: "Neuquén", pos: [-38.7027,-69.9494], z: 7 },
+        { nombre: "Rio Negro", pos: [-40.2124,-66.3796], z: 7 },
+        { nombre: "Salta", pos: [-24.4871,-64.9957], z: 7 },
+        { nombre: "San Juan", pos: [-30.6285,-69.0376], z: 7 },
+        { nombre: "San Luis", pos: [-33.6695,-66.2255], z: 7 },
+        { nombre: "Santa Cruz", pos: [-49.0667,-69.7409], z: 7 },
+        { nombre: "Santa Fe", pos: [-31.2410,-60.6676], z: 7 },
+        { nombre: "Santiago del Estero", pos: [-27.8002,-63.1063], z: 7 },
+        { nombre: "Tierra del Fuego, Antártida e Islas del Atlántico Sur", pos: [-53.8525,-66.5119], z: 7 },
+        { nombre: "Tucumán", pos: [-27.0249,-65.2036], z: 9 },
+
+    ]
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [layerStatus, setLayerStatus] = React.useState({
@@ -84,40 +111,27 @@ function Layout(props) {
             </List>
             <Divider />
             <List>
-                <ListItem disablePadding onClick={() => {
-                    setLayerStatus({
-                        ...layerStatus,
-                        zoom: 8,
-                        posicion: {
-                            lat: -23.197202,
-                            lng: -65.6820085
-                        },
-                    })
-                }}>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <MyLocationIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={'Jujuy'} />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding onClick={() => {
-                    setLayerStatus({
-                        ...layerStatus,
-                        zoom: 7,
-                        posicion: {
-                            lat: -31.1915329,
-                            lng: -60.8802759
-                        },
-                    })
-                }}>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <MyLocationIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={'Santa Fe'} />
-                    </ListItemButton>
-                </ListItem>
+                {provincias.map((r, i) => {
+                    return (
+                        <ListItem key={i} disablePadding onClick={() => {
+                            setLayerStatus({
+                                ...layerStatus,
+                                zoom: r.z,
+                                posicion: {
+                                    lat: r.pos[0],
+                                    lng: r.pos[1]
+                                },
+                            })
+                        }}>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <MyLocationIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={r.nombre} />
+                            </ListItemButton>
+                        </ListItem>
+                    )
+                })}
             </List>
         </div>
     );
