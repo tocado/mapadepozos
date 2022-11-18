@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { LayersControl, MapContainer, TileLayer } from "react-leaflet";
 import { useMap } from 'react-leaflet/hooks'
-import data from "../assets/srcSalta.json";
+import data from "../assets/csvjson.json";
 import Markers from "./Markers";
 import { GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -96,8 +96,8 @@ const MapView = (props) => {
         </table>
       </>,
       geometry: [
-        o.y.replace(',', '.'),
-        o.x.replace(',', '.')
+        o.y,
+        o.x
       ]
     }
   })
