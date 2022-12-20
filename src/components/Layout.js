@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -18,16 +18,131 @@ import MapView from './MapView'
 import OpacityIcon from '@mui/icons-material/Opacity';
 import WaterIcon from '@mui/icons-material/Water';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
-
+import GraficoCard from './GraficoCard';
+import { Grid } from '@mui/material';
+import * as topojson from "topojson-client";
+import dataPozos from '../assets/csvjson.json'
+import provinciasPozos from "./provincias.json"
+import ListadoDatos from "./ListadoDatos"
 const drawerWidth = 240;
 
 function Layout(props) {
+    const [provinciaSeleccionada, setProvinciaSeleccionada] = useState(null)
+    const [map, setMap] = useState(false)
+
+    const [cuencas, setCuencas] = useState({})
+
+    const [cuencasGrafico, setCuencasGrafico] = useState([])
+    const { window } = props;
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
+
+    useEffect(() => {
+        fetch('cuencastopo.json').then((res) => {
+            res.json().then((jsonCuencas) => {
+                setCuencas(topojson.feature(jsonCuencas, jsonCuencas.objects.cuencas))
+                const cuencasParaGraf = jsonCuencas.objects.cuencas.geometries.map((r) => {
+                    return r.properties
+                });
+                debugger
+                setCuencasGrafico(cuencasParaGraf)
+            })
+        })
+    }, [])
+    const cuencasPorProvincia = (prov) => {
+        if (cuencasGrafico.length === 0) {
+            return false
+        }
+        return cuencasGrafico.filter((r) => {
+            return r.jurisdiccion === prov
+        }).length
+    }
+    const pozos = dataPozos.map(function (o) {
+        return {
+            description: o.desc,
+            name: <>
+                <h5>{o.name}</h5>
+                <table>
+                    <tr>
+                        <th>
+                            Nombre
+                        </th>
+                        <td>
+                            {o.name}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Caudal Medio
+                        </th>
+                        <td>
+                            {o.Caudalmedio || '-'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Profundiad
+                        </th>
+                        <td>
+                            {o.Profundidad || '-'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            NivelDinamico
+                        </th>
+                        <td>
+                            {o.NivelDinamico || '-'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            NivelEstatico
+                        </th>
+                        <td>
+                            {o.NivelEstatico || '-'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Uso
+                        </th>
+                        <td>
+                            {o.Uso || '-'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Provincia
+                        </th>
+                        <td>
+                            {o.Provincia || '-'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Fuente
+                        </th>
+                        <td>
+                            {o.DuenioDelDato || '-'}
+                        </td>
+                    </tr>
+                </table>
+            </>,
+            geometry: [
+                o.y,
+                o.x
+            ]
+        }
+    })
     const provincias = [
         { nombre: "CABA", pos: [-34.6038, -58.4253], z: 12 },
         { nombre: "Buenos Aires", pos: [-37.3003, -59.2601], z: 7 },
         { nombre: "Catamarca", pos: [-27.1862, -67.3577], z: 7 },
         { nombre: "Chaco", pos: [-25.8493, -60.6119], z: 7 },
-        { nombre: "Chubut", pos: [-44.0244, -68.3770], z: 7 },
+        { nombre: "CHUBUT", pos: [-44.0244, -68.3770], z: 7 },
         { nombre: "Córdoba", pos: [-32.3614, -63.1267], z: 7 },
         { nombre: "Corrientes", pos: [-28.9505, -57.7877], z: 8 },
         { nombre: "Entre Rios", pos: [-31.9894, -59.0179], z: 8 },
@@ -36,47 +151,26 @@ function Layout(props) {
         { nombre: "La Pampa", pos: [-37.2828, -65.4783], z: 7 },
         { nombre: "La Rioja", pos: [-29.4970, -67.4335], z: 7 },
         { nombre: "Mendoza", pos: [-34.6694, -69.0591], z: 7 },
-        { nombre: "Misiones", pos: [-26.8045,-54.5046], z: 8 },
-        { nombre: "Neuquén", pos: [-38.7027,-69.9494], z: 7 },
-        { nombre: "Rio Negro", pos: [-40.2124,-66.3796], z: 7 },
-        { nombre: "Salta", pos: [-24.4871,-64.9957], z: 7 },
-        { nombre: "San Juan", pos: [-30.6285,-69.0376], z: 7 },
-        { nombre: "San Luis", pos: [-33.6695,-66.2255], z: 7 },
-        { nombre: "Santa Cruz", pos: [-49.0667,-69.7409], z: 7 },
-        { nombre: "Santa Fe", pos: [-31.2410,-60.6676], z: 7 },
-        { nombre: "Santiago del Estero", pos: [-27.8002,-63.1063], z: 7 },
-        { nombre: "Tierra del Fuego, Antártida e Islas del Atlántico Sur", pos: [-53.8525,-66.5119], z: 7 },
-        { nombre: "Tucumán", pos: [-27.0249,-65.2036], z: 9 },
+        { nombre: "Misiones", pos: [-26.8045, -54.5046], z: 8 },
+        { nombre: "Neuquén", pos: [-38.7027, -69.9494], z: 7 },
+        { nombre: "Río Negro", pos: [-40.2124, -66.3796], z: 7 },
+        { nombre: "Salta", pos: [-24.4871, -64.9957], z: 7 },
+        { nombre: "San Juan", pos: [-30.6285, -69.0376], z: 7 },
+        { nombre: "San Luis", pos: [-33.6695, -66.2255], z: 7 },
+        { nombre: "Santa Cruz", pos: [-49.0667, -69.7409], z: 7 },
+        { nombre: "Santa Fe", pos: [-31.2410, -60.6676], z: 7 },
+        { nombre: "Santiago del Estero", pos: [-27.8002, -63.1063], z: 7 },
+        { nombre: "Tierra del Fuego, Antártida e Islas del Atlántico Sur", pos: [-53.8525, -66.5119], z: 7 },
+        { nombre: "Tucumán", pos: [-27.0249, -65.2036], z: 9 },
 
     ]
-    const { window } = props;
-    const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [layerStatus, setLayerStatus] = React.useState({
-        cuencas: false,
-        pozos: false,
-        posicion: {
-            lat: -38.5094661,
-            lng: -73.8996827
-        },
-        zoom: 4,
-    });
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-    };
 
     const drawer = (
         <div>
             <Toolbar />
             <List>
                 <ListItem disablePadding onClick={() => {
-                    setLayerStatus({
-                        ...layerStatus,
-                        zoom: 4,
-                        posicion: {
-                            lat: -38.5094661,
-                            lng: -73.8996827
-                        },
-                    })
+                    map.setView([-38.5094661, -73.8996827], 4);
                 }}>
                     <ListItemButton>
                         <ListItemIcon>
@@ -90,7 +184,6 @@ function Layout(props) {
             <List>
                 <ListItem disablePadding onClick={() => {
                     document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(3) > span > input").click()
-                    //setLayerStatus({ ...layerStatus, cuencas: !layerStatus.cuencas })
                 }}>
                     <ListItemButton>
                         <ListItemIcon>
@@ -101,7 +194,6 @@ function Layout(props) {
                 </ListItem>
                 <ListItem disablePadding onClick={() => {
                     document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(1) > span > input").click()
-                    //setLayerStatus({ ...layerStatus, pozos: !layerStatus.pozos })
                 }}>
                     <ListItemButton>
                         <ListItemIcon>
@@ -116,14 +208,8 @@ function Layout(props) {
                 {provincias.map((r, i) => {
                     return (
                         <ListItem key={i} disablePadding onClick={() => {
-                            setLayerStatus({
-                                ...layerStatus,
-                                zoom: r.z,
-                                posicion: {
-                                    lat: r.pos[0],
-                                    lng: r.pos[1]
-                                },
-                            })
+                            map.setView([r.pos[0], r.pos[1]], r.z);
+                            setProvinciaSeleccionada(r.nombre)
                         }}>
                             <ListItemButton>
                                 <ListItemIcon>
@@ -202,7 +288,33 @@ function Layout(props) {
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
-                <MapView layerStatus={layerStatus} />
+                <Grid container spacing={5} justifyContent="space-around">
+                    {provinciaSeleccionada != null && (
+                        <Grid item>
+                            <GraficoCard valor={cuencasPorProvincia(provinciaSeleccionada)} etiqueta={'Cuencas en ' + provinciaSeleccionada} background="lightseagreen" />
+                        </Grid>
+                    )
+                    }
+
+                    <Grid item>
+                        <GraficoCard valor={cuencasPorProvincia("Santa Cruz")} etiqueta={'Cuencas en Santa Cruz'} background="lightcoral" />
+                    </Grid>
+                    <Grid item>
+                        <GraficoCard valor={cuencasPorProvincia("CHUBUT")} etiqueta={'Cuencas en CHUBUT'} background="lightsalmon" />
+                    </Grid>
+                    <Grid item>
+                        <GraficoCard valor={cuencasPorProvincia("La Pampa")} etiqueta={'Cuencas en La Pampa'} background="lightgreen" />
+                    </Grid>
+                    <Grid item>
+                        <GraficoCard valor={cuencasPorProvincia("Buenos Aires")} etiqueta={'Cuencas en Buenos Aires'} background="lightskyblue" />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <ListadoDatos data={dataPozos} />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <MapView cuencas={cuencas} setMap={setMap} markers={pozos} provincias={provinciasPozos} />
+                    </Grid>
+                </Grid>
             </Box>
         </Box>
     );
