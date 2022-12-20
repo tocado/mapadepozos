@@ -89,7 +89,8 @@ function Layout(props) {
             <Divider />
             <List>
                 <ListItem disablePadding onClick={() => {
-                    setLayerStatus({ ...layerStatus, cuencas: !layerStatus.cuencas })
+                    document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(3) > span > input").click()
+                    //setLayerStatus({ ...layerStatus, cuencas: !layerStatus.cuencas })
                 }}>
                     <ListItemButton>
                         <ListItemIcon>
@@ -99,7 +100,8 @@ function Layout(props) {
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding onClick={() => {
-                    setLayerStatus({ ...layerStatus, pozos: !layerStatus.pozos })
+                    document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(1) > span > input").click()
+                    //setLayerStatus({ ...layerStatus, pozos: !layerStatus.pozos })
                 }}>
                     <ListItemButton>
                         <ListItemIcon>

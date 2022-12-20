@@ -6,13 +6,14 @@ import Markers from "./Markers";
 import { GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import * as topojson from "topojson-client";
-
+import provincias from "./provincias.json"
+//import cuencast from "./cuencastopo.json"
 const Eventos = (props) => {
   let {layerStatus} = props
   const map = useMap()
   useEffect(() => {
     map.setView(layerStatus.posicion, layerStatus.zoom);
-  }, [layerStatus.posicion]);
+  }, [layerStatus]);
   //console.table(map.getCenter())
   // map.setPosition(layerStatus.posicion, layerStatus.zoom)
   // map.flyTo(layerStatus.posicion, layerStatus.zoom, {'duration':0.25} )
@@ -20,8 +21,8 @@ const Eventos = (props) => {
 }
 const MapView = (props) => {
   const [cuencas, setCuencas] = useState({})
-  const [provincias, setProvincias] = useState({})
-
+  //const [provincias, setProvincias] = useState({})
+  //const cuencas = topojson.feature(cuencast, cuencast.objects.cuencas)
   const { layerStatus } = props;
   let markers = data.map(function (o) {
     return {
@@ -123,11 +124,11 @@ const MapView = (props) => {
         setCuencas(topojson.feature(jsonCuencas, jsonCuencas.objects.cuencas))
       })
     })
-    fetch('provincias.json', opt).then((res) => {
-      res.json().then((jsonProvincias) => {
-        setProvincias(jsonProvincias)
-      })
-    })
+    // fetch('provincias.json', opt).then((res) => {
+    //   res.json().then((jsonProvincias) => {
+    //     setProvincias(jsonProvincias)
+    //   })
+    // })
   }, [])
 
   return (
