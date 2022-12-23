@@ -18,21 +18,22 @@ import MapView from './MapView'
 import OpacityIcon from '@mui/icons-material/Opacity';
 import WaterIcon from '@mui/icons-material/Water';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
-import GraficoCard from './GraficoCard';
 import { Grid } from '@mui/material';
 import * as topojson from "topojson-client";
 import dataPozos from '../assets/csvjson.json'
-import provinciasPozos from "./provincias.json"
+import provincias from "./provincias.json"
 import ListadoDatos from "./ListadoDatos"
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
 const drawerWidth = 240;
 
 function Layout(props) {
-    const [provinciaSeleccionada, setProvinciaSeleccionada] = useState(null)
     const [map, setMap] = useState(false)
 
     const [cuencas, setCuencas] = useState({})
+    const [cuencasFiltradas, setCuencasFiltradas] = useState({})
 
-    const [cuencasGrafico, setCuencasGrafico] = useState([])
+    const [provinciasFiltradas, setProvinciasFiltradas] = useState({})
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
     const handleDrawerToggle = () => {
@@ -42,26 +43,16 @@ function Layout(props) {
     useEffect(() => {
         fetch('cuencastopo.json').then((res) => {
             res.json().then((jsonCuencas) => {
-                setCuencas(topojson.feature(jsonCuencas, jsonCuencas.objects.cuencas))
-                const cuencasParaGraf = jsonCuencas.objects.cuencas.geometries.map((r) => {
-                    return r.properties
-                });
-                debugger
-                setCuencasGrafico(cuencasParaGraf)
+                const cuencasPreparadas = topojson.feature(jsonCuencas, jsonCuencas.objects.cuencas)
+                setCuencas(cuencasPreparadas)
+                //setCuencasFiltradas(cuencasPreparadas)
             })
         })
     }, [])
-    const cuencasPorProvincia = (prov) => {
-        if (cuencasGrafico.length === 0) {
-            return false
-        }
-        return cuencasGrafico.filter((r) => {
-            return r.jurisdiccion === prov
-        }).length
-    }
     const pozos = dataPozos.map(function (o) {
         return {
             description: o.desc,
+            provincia: o.Provincia,
             name: <>
                 <h5>{o.name}</h5>
                 <table>
@@ -137,7 +128,8 @@ function Layout(props) {
             ]
         }
     })
-    const provincias = [
+    const [pozosFiltrados, setPozosFiltrados] = useState([])
+    const provinciasLocation = [
         { nombre: "CABA", pos: [-34.6038, -58.4253], z: 12 },
         { nombre: "Buenos Aires", pos: [-37.3003, -59.2601], z: 7 },
         { nombre: "Catamarca", pos: [-27.1862, -67.3577], z: 7 },
@@ -162,14 +154,47 @@ function Layout(props) {
         { nombre: "Santiago del Estero", pos: [-27.8002, -63.1063], z: 7 },
         { nombre: "Tierra del Fuego, Antártida e Islas del Atlántico Sur", pos: [-53.8525, -66.5119], z: 7 },
         { nombre: "Tucumán", pos: [-27.0249, -65.2036], z: 9 },
-
     ]
+    const cambioProvincia = (event) => {
+        const prov = provinciasLocation.filter((r) => {
+            return r.nombre === event.target.value
+        })[0]
+        map.setView([prov.pos[0], prov.pos[1]], prov.z);
 
+        //provincias
+        let features = provincias.features.filter((r) => {
+            return r.properties.name.toLowerCase() === prov.nombre.toLowerCase()
+        })
+        let filtradas = {
+            type: provincias.type,
+            crs: provincias.crs,
+            features: features,
+        }
+        setProvinciasFiltradas(filtradas)
+
+        //cuencas
+        features = cuencas.features.filter((r) => {
+            return r.properties.jurisdiccion === prov.nombre
+        })
+        filtradas = {
+            type: provincias.type,
+            crs: provincias.crs,
+            features: features,
+        }
+        setCuencasFiltradas(filtradas)
+        setPozosFiltrados(pozos.filter((r) => {
+            return prov.nombre === r.provincia
+        }))
+        //debugger
+    };
     const drawer = (
         <div>
             <Toolbar />
             <List>
                 <ListItem disablePadding onClick={() => {
+                    setProvinciasFiltradas(provincias)
+                    setCuencasFiltradas(cuencas)
+                    setPozosFiltrados(pozos)
                     map.setView([-38.5094661, -73.8996827], 4);
                 }}>
                     <ListItemButton>
@@ -183,43 +208,55 @@ function Layout(props) {
             <Divider />
             <List>
                 <ListItem disablePadding onClick={() => {
-                    document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(3) > span > input").click()
+                    //document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(3) > span > input").click()
+                    const colecciones = document.querySelectorAll("div.leaflet-control-layers-overlays label")
+                    const input = Array.from(colecciones).find(el => el.textContent === ' Cuencas')
+                    input.children[0].children[0].click()
+                    //debugger
                 }}>
                     <ListItemButton>
                         <ListItemIcon>
                             <WaterIcon />
                         </ListItemIcon>
-                        <ListItemText primary={'Cuencas de Agua'} />
+                        <ListItemText primary={'Cuencas'} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding onClick={() => {
-                    document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(1) > span > input").click()
+                    const colecciones = document.querySelectorAll("div.leaflet-control-layers-overlays label")
+                    const input = Array.from(colecciones).find(el => el.textContent === ' Pozos')
+                    input.children[0].children[0].click()
                 }}>
                     <ListItemButton>
                         <ListItemIcon>
                             <OpacityIcon />
                         </ListItemIcon>
-                        <ListItemText primary={'Pozos de Agua'} />
+                        <ListItemText primary={'Pozos'} />
                     </ListItemButton>
                 </ListItem>
             </List>
             <Divider />
             <List>
-                {provincias.map((r, i) => {
-                    return (
-                        <ListItem key={i} disablePadding onClick={() => {
-                            map.setView([r.pos[0], r.pos[1]], r.z);
-                            setProvinciaSeleccionada(r.nombre)
-                        }}>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <MyLocationIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={r.nombre} />
-                            </ListItemButton>
-                        </ListItem>
-                    )
-                })}
+                <ListItem disablePadding onClick={() => {
+                    //document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(3) > span > input").click()
+                }}>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <WaterIcon />
+                        </ListItemIcon>
+                        <Select
+                            id="label-provincias"
+                            label="Provincias"
+                            onChange={cambioProvincia}
+                            defaultValue={'CABA'}
+                        >
+                            {provinciasLocation.map((r, i) => {
+                                return (
+                                    <MenuItem key={i} value={r.nombre}>{r.nombre}</MenuItem>
+                                )
+                            })}
+                        </Select>
+                    </ListItemButton>
+                </ListItem>
             </List>
         </div>
     );
@@ -289,30 +326,11 @@ function Layout(props) {
             >
                 <Toolbar />
                 <Grid container spacing={5} justifyContent="space-around">
-                    {provinciaSeleccionada != null && (
-                        <Grid item>
-                            <GraficoCard valor={cuencasPorProvincia(provinciaSeleccionada)} etiqueta={'Cuencas en ' + provinciaSeleccionada} background="lightseagreen" />
-                        </Grid>
-                    )
-                    }
-
-                    <Grid item>
-                        <GraficoCard valor={cuencasPorProvincia("Santa Cruz")} etiqueta={'Cuencas en Santa Cruz'} background="lightcoral" />
+                    <Grid item xs={12}>
+                        <MapView cuencas={cuencasFiltradas} setMap={setMap} markers={pozosFiltrados} provincias={provinciasFiltradas} />
                     </Grid>
-                    <Grid item>
-                        <GraficoCard valor={cuencasPorProvincia("CHUBUT")} etiqueta={'Cuencas en CHUBUT'} background="lightsalmon" />
-                    </Grid>
-                    <Grid item>
-                        <GraficoCard valor={cuencasPorProvincia("La Pampa")} etiqueta={'Cuencas en La Pampa'} background="lightgreen" />
-                    </Grid>
-                    <Grid item>
-                        <GraficoCard valor={cuencasPorProvincia("Buenos Aires")} etiqueta={'Cuencas en Buenos Aires'} background="lightskyblue" />
-                    </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
                         <ListadoDatos data={dataPozos} />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <MapView cuencas={cuencas} setMap={setMap} markers={pozos} provincias={provinciasPozos} />
                     </Grid>
                 </Grid>
             </Box>

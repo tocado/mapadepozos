@@ -9,8 +9,6 @@ const MapView = ({ cuencas = {}, setMap, markers, provincias } = {}) => {
     return <></>
   }
 
-
-
   const onEach = (feature, layer) => {
     let PopupContent = "<pre>" +
       JSON.stringify(feature.properties, null, " ").replace(/[{}"]/g, "") +
@@ -31,20 +29,19 @@ const MapView = ({ cuencas = {}, setMap, markers, provincias } = {}) => {
         url="https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <LayersControl position="topright">
-        <LayersControl.Overlay name="Pozos de Agua">
+      <LayersControl position="topright" >
+        <LayersControl.Overlay name="Provincias" checked={true}>
+          {Object.keys(provincias).length > 1 && provincias.features.length > 0 && (
+            <GeoJSON key={provincias.length + provincias.features[0].properties.name} data={provincias} />
+          )}
+        </LayersControl.Overlay>
+        <LayersControl.Overlay name="Pozos" checked={true}>
           <Markers markers={markers} />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="Cuencas de Agua">
-          {Object.keys(cuencas).length > 1 && (
-            <GeoJSON data={cuencas} onEachFeature={onEach} />
-          )}
-        </LayersControl.Overlay>
-
-        <LayersControl.Overlay name="Provincias" checked={true}>
-          {Object.keys(provincias).length > 1 && (
-            <GeoJSON data={provincias} />
+        <LayersControl.Overlay name="Cuencas" checked={true}>
+          {Object.keys(cuencas).length > 1 && cuencas.features.length > 0 && (
+            <GeoJSON key={cuencas.length + cuencas.features[0].properties.jurisdiccion} data={cuencas} onEachFeature={onEach} />
           )}
         </LayersControl.Overlay>
       </LayersControl>
