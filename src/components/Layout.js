@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -29,10 +30,13 @@ const drawerWidth = 240;
 
 function Layout(props) {
     const [map, setMap] = useState(false)
-
+    const [capaActivada, setCapaActivada] = useState({
+        cuencas: false,
+        pozos: false,
+    })
     const [cuencas, setCuencas] = useState({})
     const [cuencasFiltradas, setCuencasFiltradas] = useState({})
-
+    const [provinciaSel, setProvinciaSel] = useState(false)
     const [provinciasFiltradas, setProvinciasFiltradas] = useState({})
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -45,7 +49,6 @@ function Layout(props) {
             res.json().then((jsonCuencas) => {
                 const cuencasPreparadas = topojson.feature(jsonCuencas, jsonCuencas.objects.cuencas)
                 setCuencas(cuencasPreparadas)
-                //setCuencasFiltradas(cuencasPreparadas)
             })
         })
     }, [])
@@ -155,7 +158,32 @@ function Layout(props) {
         { nombre: "Tierra del Fuego, Antártida e Islas del Atlántico Sur", pos: [-53.8525, -66.5119], z: 7 },
         { nombre: "Tucumán", pos: [-27.0249, -65.2036], z: 9 },
     ]
+    const verPozos = (estado) => {
+        const colecciones = document.querySelectorAll("div.leaflet-control-layers-overlays label")
+        const input = Array.from(colecciones).find(el => el.textContent === ' Pozos')
+        const capa = { pozos: estado }
+        setCapaActivada(capaActivada => ({ ...capaActivada, ...capa }))
+        input.children[0].children[0].click()
+    }
+    const verCuencas = (estado) => {
+        const colecciones = document.querySelectorAll("div.leaflet-control-layers-overlays label")
+        const input = Array.from(colecciones).find(el => el.textContent === ' Cuencas')
+
+        const capa = { cuencas: estado }
+        setCapaActivada(capaActivada => ({ ...capaActivada, ...capa }))
+
+        input.children[0].children[0].click()
+    }
+
+    const eliminarSeleccion = () => {
+        setProvinciaSel(false)
+        verPozos(false)
+        verCuencas(false)
+        setProvinciasFiltradas([])
+        map.setView([-38.5094661, -73.8996827], 4);
+    }
     const cambioProvincia = (event) => {
+        setProvinciaSel(event.target.value)
         const prov = provinciasLocation.filter((r) => {
             return r.nombre === event.target.value
         })[0]
@@ -186,6 +214,9 @@ function Layout(props) {
             return prov.nombre === r.provincia
         }))
         //debugger
+
+        const capa = { pozos: true, cuencas: true }
+        setCapaActivada(capaActivada => ({ ...capaActivada, ...capa }))
     };
     const drawer = (
         <div>
@@ -209,12 +240,10 @@ function Layout(props) {
             <List>
                 <ListItem disablePadding onClick={() => {
                     //document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(3) > span > input").click()
-                    const colecciones = document.querySelectorAll("div.leaflet-control-layers-overlays label")
-                    const input = Array.from(colecciones).find(el => el.textContent === ' Cuencas')
-                    input.children[0].children[0].click()
+                    verCuencas(!capaActivada.cuencas)
                     //debugger
                 }}>
-                    <ListItemButton>
+                    <ListItemButton selected={capaActivada.cuencas}>
                         <ListItemIcon>
                             <WaterIcon />
                         </ListItemIcon>
@@ -222,11 +251,9 @@ function Layout(props) {
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding onClick={() => {
-                    const colecciones = document.querySelectorAll("div.leaflet-control-layers-overlays label")
-                    const input = Array.from(colecciones).find(el => el.textContent === ' Pozos')
-                    input.children[0].children[0].click()
+                    verPozos(!capaActivada.pozos)
                 }}>
-                    <ListItemButton>
+                    <ListItemButton selected={capaActivada.pozos}>
                         <ListItemIcon>
                             <OpacityIcon />
                         </ListItemIcon>
@@ -243,15 +270,19 @@ function Layout(props) {
                         <ListItemIcon>
                             <WaterIcon />
                         </ListItemIcon>
+                        {provinciaSel ? <IconButton onClick={eliminarSeleccion} aria-label="delete"><DeleteIcon /></IconButton> : <></>}
                         <Select
                             id="label-provincias"
                             label="Provincias"
                             onChange={cambioProvincia}
-                            defaultValue={'CABA'}
+                            defaultValue={false}
+                            value={provinciaSel}
+                            size="small"
                         >
+                            <MenuItem selected={true} value={false}>Provincias</MenuItem>
                             {provinciasLocation.map((r, i) => {
                                 return (
-                                    <MenuItem key={i} value={r.nombre}>{r.nombre}</MenuItem>
+                                    <MenuItem selected={() => r.nombre === provinciaSel} key={i} value={r.nombre}>{r.nombre}</MenuItem>
                                 )
                             })}
                         </Select>
