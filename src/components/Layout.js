@@ -161,18 +161,22 @@ function Layout(props) {
     const verPozos = (estado) => {
         const colecciones = document.querySelectorAll("div.leaflet-control-layers-overlays label")
         const input = Array.from(colecciones).find(el => el.textContent === ' Pozos')
+
+        if (input.firstChild.firstChild.checked !== estado) {
+            input.firstChild.firstChild.click()
+        }
         const capa = { pozos: estado }
         setCapaActivada(capaActivada => ({ ...capaActivada, ...capa }))
-        input.children[0].children[0].click()
     }
     const verCuencas = (estado) => {
         const colecciones = document.querySelectorAll("div.leaflet-control-layers-overlays label")
         const input = Array.from(colecciones).find(el => el.textContent === ' Cuencas')
 
+        if (input.firstChild.firstChild.checked !== estado) {
+            input.firstChild.firstChild.click()
+        }
         const capa = { cuencas: estado }
         setCapaActivada(capaActivada => ({ ...capaActivada, ...capa }))
-
-        input.children[0].children[0].click()
     }
 
     const eliminarSeleccion = () => {
@@ -214,9 +218,8 @@ function Layout(props) {
             return prov.nombre === r.provincia
         }))
         //debugger
-
-        const capa = { pozos: true, cuencas: true }
-        setCapaActivada(capaActivada => ({ ...capaActivada, ...capa }))
+        verPozos(true)
+        verCuencas(true)
     };
     const drawer = (
         <div>
