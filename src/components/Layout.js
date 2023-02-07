@@ -43,7 +43,6 @@ function Layout(props) {
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-
     useEffect(() => {
         fetch('cuencastopo.json').then((res) => {
             res.json().then((jsonCuencas) => {
@@ -285,7 +284,7 @@ function Layout(props) {
                             <MenuItem selected={true} value={false}>Provincias</MenuItem>
                             {provinciasLocation.map((r, i) => {
                                 return (
-                                    <MenuItem selected={() => r.nombre === provinciaSel} key={i} value={r.nombre}>{r.nombre}</MenuItem>
+                                    <MenuItem selected={r.nombre === provinciaSel} key={i} value={r.nombre}>{r.nombre}</MenuItem>
                                 )
                             })}
                         </Select>
@@ -364,7 +363,7 @@ function Layout(props) {
                         <MapView cuencas={cuencasFiltradas} setMap={setMap} markers={pozosFiltrados} provincias={provinciasFiltradas} />
                     </Grid>
                     <Grid item xs={12}>
-                        <ListadoDatos data={dataPozos} />
+                        {dataPozos.length > 0 ? <ListadoDatos data={dataPozos} /> : <></>}
                     </Grid>
                 </Grid>
             </Box>
