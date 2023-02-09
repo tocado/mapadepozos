@@ -21,7 +21,7 @@ import WaterIcon from '@mui/icons-material/Water';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import { Grid } from '@mui/material';
 import * as topojson from "topojson-client";
-import dataPozos from '../assets/csvjson.json'
+import dataPozos from '../assets/pozos.json'
 import provincias from "./provincias.json"
 import ListadoDatos from "./ListadoDatos"
 import MenuItem from '@mui/material/MenuItem'
@@ -136,10 +136,10 @@ function Layout(props) {
         { nombre: "Buenos Aires", pos: [-37.3003, -59.2601], z: 7 },
         { nombre: "Catamarca", pos: [-27.1862, -67.3577], z: 7 },
         { nombre: "Chaco", pos: [-25.8493, -60.6119], z: 7 },
-        { nombre: "CHUBUT", pos: [-44.0244, -68.3770], z: 7 },
+        { nombre: "Chubut", pos: [-44.0244, -68.3770], z: 7 },
         { nombre: "Córdoba", pos: [-32.3614, -63.1267], z: 7 },
         { nombre: "Corrientes", pos: [-28.9505, -57.7877], z: 8 },
-        { nombre: "Entre Rios", pos: [-31.9894, -59.0179], z: 8 },
+        { nombre: "Entre Ríos", pos: [-31.9894, -59.0179], z: 8 },
         { nombre: "Formosa", pos: [-24.5971, -60.0077], z: 7 },
         { nombre: "Jujuy", pos: [-23.3120, -65.6102], z: 8 },
         { nombre: "La Pampa", pos: [-37.2828, -65.4783], z: 7 },
@@ -147,7 +147,7 @@ function Layout(props) {
         { nombre: "Mendoza", pos: [-34.6694, -69.0591], z: 7 },
         { nombre: "Misiones", pos: [-26.8045, -54.5046], z: 8 },
         { nombre: "Neuquén", pos: [-38.7027, -69.9494], z: 7 },
-        { nombre: "Río Negro", pos: [-40.2124, -66.3796], z: 7 },
+        { nombre: "Rio Negro", pos: [-40.2124, -66.3796], z: 7 },
         { nombre: "Salta", pos: [-24.4871, -64.9957], z: 7 },
         { nombre: "San Juan", pos: [-30.6285, -69.0376], z: 7 },
         { nombre: "San Luis", pos: [-33.6695, -66.2255], z: 7 },
