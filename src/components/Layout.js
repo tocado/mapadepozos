@@ -27,6 +27,7 @@ import ListadoDatos from "./ListadoDatos"
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 import logo from '../assets/logo.jpg'
+import FiltroTablaPozos from './FiltroTablaPozos'
 const drawerWidth = 240;
 
 function Layout(props) {
@@ -41,6 +42,8 @@ function Layout(props) {
     const [provinciasFiltradas, setProvinciasFiltradas] = useState({})
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [tablaPozos, setTablaPozos] = useState([]);
+
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -54,8 +57,9 @@ function Layout(props) {
     }, [])
     const pozos = dataPozos.map(function (o) {
         return {
-            description: o.desc,
-            provincia: o.Provincia,
+            // description: o.desc,
+            // provincia: o.Provincia,
+            ...o,
             name: <>
                 <h5>{o.name}</h5>
                 <table>
@@ -162,7 +166,7 @@ function Layout(props) {
         const colecciones = document.querySelectorAll("div.leaflet-control-layers-overlays label")
         const input = Array.from(colecciones).find(el => el.textContent === ' Pozos')
 
-        if (input.firstChild.firstChild.checked !== estado) {
+        if (input && input.firstChild.firstChild.checked !== estado) {
             input.firstChild.firstChild.click()
         }
         const capa = { pozos: estado }
@@ -172,7 +176,7 @@ function Layout(props) {
         const colecciones = document.querySelectorAll("div.leaflet-control-layers-overlays label")
         const input = Array.from(colecciones).find(el => el.textContent === ' Cuencas')
 
-        if (input.firstChild.firstChild.checked !== estado) {
+        if (input && input.firstChild.firstChild.checked !== estado) {
             input.firstChild.firstChild.click()
         }
         const capa = { cuencas: estado }
@@ -186,10 +190,10 @@ function Layout(props) {
         setProvinciasFiltradas([])
         map.setView([-38.5094661, -73.8996827], 4);
     }
-    const cambioProvincia = (event) => {
-        setProvinciaSel(event.target.value)
+    const cambioProvincia = (f) => {
+        setProvinciaSel(f.Provincia)
         const prov = provinciasLocation.filter((r) => {
-            return r.nombre === event.target.value
+            return r.nombre === f.Provincia
         })[0]
         map.setView([prov.pos[0], prov.pos[1]], prov.z);
 
@@ -215,7 +219,7 @@ function Layout(props) {
         }
         setCuencasFiltradas(filtradas)
         setPozosFiltrados(pozos.filter((r) => {
-            return prov.nombre === r.provincia
+            return prov.nombre === r.Provincia && r.Departamento === f.Departamento
         }))
         //debugger
         verPozos(true)
@@ -303,6 +307,8 @@ function Layout(props) {
                     </ListItemButton>
                 </ListItem>
             </List>
+            <Divider />
+            {dataPozos.length > 0 ? <FiltroTablaPozos cambioProvinciaL={cambioProvincia} data={dataPozos} setTablaPozos={setTablaPozos} /> : <></>}
         </div>
     );
 
@@ -375,7 +381,7 @@ function Layout(props) {
                         <MapView cuencas={cuencasFiltradas} setMap={setMap} markers={pozosFiltrados} provincias={provinciasFiltradas} />
                     </Grid>
                     <Grid item xs={12}>
-                        {dataPozos.length > 0 ? <ListadoDatos data={dataPozos} /> : <></>}
+                        {tablaPozos.length > 0 ? <ListadoDatos data={tablaPozos} /> : <></>}
                     </Grid>
                 </Grid>
             </Box>
