@@ -6,7 +6,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -24,8 +23,6 @@ import * as topojson from "topojson-client";
 import dataPozos from '../assets/pozos.json'
 import provincias from "./provincias.json"
 import ListadoDatos from "./ListadoDatos"
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
 import logo from '../assets/logo.jpg'
 import FiltroTablaPozos from './FiltroTablaPozos'
 const drawerWidth = 240;
@@ -38,7 +35,7 @@ function Layout(props) {
     })
     const [cuencas, setCuencas] = useState({})
     const [cuencasFiltradas, setCuencasFiltradas] = useState({})
-    const [provinciaSel, setProvinciaSel] = useState(false)
+    // const [provinciaSel, setProvinciaSel] = useState(false)
     const [provinciasFiltradas, setProvinciasFiltradas] = useState({})
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -182,16 +179,8 @@ function Layout(props) {
         const capa = { cuencas: estado }
         setCapaActivada(capaActivada => ({ ...capaActivada, ...capa }))
     }
-
-    const eliminarSeleccion = () => {
-        setProvinciaSel(false)
-        verPozos(false)
-        verCuencas(false)
-        setProvinciasFiltradas([])
-        map.setView([-38.5094661, -73.8996827], 4);
-    }
     const cambioProvincia = (f) => {
-        setProvinciaSel(f.Provincia)
+        // setProvinciaSel(f.Provincia)
         const prov = provinciasLocation.filter((r) => {
             return r.nombre === f.Provincia
         })[0]
@@ -276,34 +265,6 @@ function Layout(props) {
                             <OpacityIcon />
                         </ListItemIcon>
                         <ListItemText primary={'Pozos'} />
-                    </ListItemButton>
-                </ListItem>
-            </List>
-            <Divider />
-            <List>
-                <ListItem disablePadding onClick={() => {
-                    //document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(3) > span > input").click()
-                }}>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <WaterIcon />
-                        </ListItemIcon>
-                        {provinciaSel ? <IconButton onClick={eliminarSeleccion} aria-label="delete"><DeleteIcon /></IconButton> : <></>}
-                        <Select
-                            id="label-provincias"
-                            label="Provincias"
-                            onChange={cambioProvincia}
-                            defaultValue={false}
-                            value={provinciaSel}
-                            size="small"
-                        >
-                            <MenuItem selected={true} value={false}>Provincias</MenuItem>
-                            {provinciasLocation.map((r, i) => {
-                                return (
-                                    <MenuItem selected={r.nombre === provinciaSel} key={i} value={r.nombre}>{r.nombre}</MenuItem>
-                                )
-                            })}
-                        </Select>
                     </ListItemButton>
                 </ListItem>
             </List>
