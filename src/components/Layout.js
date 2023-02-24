@@ -135,7 +135,7 @@ function Layout(props) {
     const [pozosFiltrados, setPozosFiltrados] = useState(pozos)
     const provinciasLocation = [
         { nombre: "CABA", pos: [-34.6038, -58.4253], z: 12 },
-        { nombre: "Buenos Aires", pos: [-37.3003, -59.2601], z: 7 },
+        { nombre: "Buenos Aires", pos: [-37.3003, -59.2601], z: 6 },
         { nombre: "Catamarca", pos: [-27.1862, -67.3577], z: 7 },
         { nombre: "Chaco", pos: [-25.8493, -60.6119], z: 7 },
         { nombre: "Chubut", pos: [-44.0244, -68.3770], z: 7 },
