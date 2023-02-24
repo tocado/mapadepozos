@@ -26,6 +26,7 @@ import provincias from "./provincias.json"
 import ListadoDatos from "./ListadoDatos"
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
+import logo from '../assets/logo.jpg'
 const drawerWidth = 240;
 
 function Layout(props) {
@@ -222,7 +223,18 @@ function Layout(props) {
     };
     const drawer = (
         <div>
-            <Toolbar />
+            {/* <Toolbar /> */}
+            <img 
+                src={logo}
+                width={drawerWidth}
+                style={{
+                    paddingLeft: "40px",
+                    paddingRight: "40px",
+                    paddingTop: "20px",
+                    margin: "0px",
+                }}
+                alt="logo"
+            />            
             <List>
                 <ListItem disablePadding onClick={() => {
                     setProvinciasFiltradas(provincias)
