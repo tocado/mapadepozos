@@ -26,7 +26,7 @@ const MapView = ({ cuencas = {}, setMap, markers, provincias } = {}) => {
   return (
     <MapContainer center={layerStatus.posicion} zoom={layerStatus.zoom} ref={setMap}>
       <TileLayer
-        url="https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png"
+        url="https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_topo@EPSG%3A3857@png/{z}/{x}/{-y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       <LayersControl position="topright" >

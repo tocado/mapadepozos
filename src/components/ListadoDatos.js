@@ -231,7 +231,7 @@ export default function ListadoDatos({ data }) {
 
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden', padding: 2 }}>
-            <Typography variant="h5">Listado de Cuencas</Typography>
+            <Typography variant="h5">Listado de pozos</Typography>
             <TableContainer>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
