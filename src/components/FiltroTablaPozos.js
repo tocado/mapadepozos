@@ -3,11 +3,12 @@ import { List, ListItem, ListItemButton, ListItemIcon, MenuItem, Select } from "
 import WaterIcon from '@mui/icons-material/Water';
 
 const FiltroTablaPozos = (props) => {
-    const { data, setTablaPozos, cambioProvinciaL } = props;
+    const { data, setTablaPozos, cambioProvinciaL, provv } = props;
     const [provincias, setProvincias] = useState([])
     const [pozosFiltrados, setPozosFiltrados] = useState([])
     const [departamentos, setDepartamentos] = useState([])
     const [provinciaSeleccionada, setProvinciaSeleccionada] = useState(false)
+
     const cambioProvincia = (e) => {
         let filtroDepa = data.filter((r) => {
             return r.Provincia === e.target.value
@@ -34,11 +35,16 @@ const FiltroTablaPozos = (props) => {
         const provi = [...new Set(provTemp)];
         setProvincias(provi)
     }, [data])
+    useEffect(() => {
+        if (!provv) {
+            setProvinciaSeleccionada(false)
+        }
+    }, [provv])
     return <List>
         <ListItem disablePadding>
             <ListItemButton>
                 <ListItemIcon>
-                    <WaterIcon />
+                    <WaterIcon />{provv}
                 </ListItemIcon>
                 <Select
                     id="label-provincias"
@@ -56,7 +62,7 @@ const FiltroTablaPozos = (props) => {
                 </Select>
             </ListItemButton>
         </ListItem>
-        {provinciaSeleccionada !== false ? <ListItem>
+        {provinciaSeleccionada !== false? <ListItem>
             <ListItemButton>
                 <Select
                     id="label-departamentos"

@@ -40,6 +40,8 @@ function Layout(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
     const [tablaPozos, setTablaPozos] = useState([]);
+    const [filtroDepa, setFiltroDepa] = useState(false);
+    const [filtroProv, setFiltroProv] = useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -248,7 +250,12 @@ function Layout(props) {
             <List>
                 <ListItem disablePadding onClick={() => {
                     //document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(3) > span > input").click()
-                    verCuencas(!capaActivada.cuencas)
+                    setProvinciasFiltradas({})
+                    setCuencasFiltradas(cuencas)
+                    verCuencas(true)
+                    verPozos(false)
+                    setFiltroDepa(false)
+                    setFiltroProv(false)
                     //debugger
                 }}>
                     <ListItemButton selected={capaActivada.cuencas}>
@@ -270,7 +277,7 @@ function Layout(props) {
                 </ListItem>
             </List>
             <Divider />
-            {dataPozos.length > 0 ? <FiltroTablaPozos cambioProvinciaL={cambioProvincia} data={dataPozos} setTablaPozos={setTablaPozos} /> : <></>}
+            {dataPozos.length > 0 ? <FiltroTablaPozos cambioProvinciaL={cambioProvincia} data={dataPozos} setTablaPozos={setTablaPozos} provv={filtroProv} depav={filtroDepa} /> : <></>}
         </div>
     );
 
