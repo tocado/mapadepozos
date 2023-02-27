@@ -197,7 +197,7 @@ function Layout(props) {
         }
         setProvinciasFiltradas(filtradas)
 
-        //cuencas
+        /*cuencas
         features = cuencas.features.filter((r) => {
             return r.properties.jurisdiccion === prov.nombre
         })
@@ -207,12 +207,13 @@ function Layout(props) {
             features: features,
         }
         setCuencasFiltradas(filtradas)
+        */
         setPozosFiltrados(pozos.filter((r) => {
-            return prov.nombre === r.Provincia && r.Departamento === f.Departamento
+            return prov.nombre === r.Provincia && (!f.Departamento || r.Departamento === f.Departamento)
         }))
         //debugger
         verPozos(true)
-        verCuencas(true)
+        verCuencas(false)
     };
     const drawer = (
         <div>

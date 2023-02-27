@@ -17,7 +17,8 @@ const FiltroTablaPozos = (props) => {
         setDepartamentos(depa)
         setPozosFiltrados(filtroDepa)
         setTablaPozos(filtroDepa)
-        return setProvinciaSeleccionada(e.target.value)
+        setProvinciaSeleccionada(e.target.value)
+        return cambioProvinciaL({Provincia:e.target.value})
     }
     const cambioDepartamento = (e) => {
         const PozosFinal = pozosFiltrados.filter((d) => d.Provincia === provinciaSeleccionada && d.Departamento === e.target.value)
