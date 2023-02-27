@@ -40,7 +40,6 @@ function Layout(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
     const [tablaPozos, setTablaPozos] = useState([]);
-    const [filtroDepa, setFiltroDepa] = useState(false);
     const [filtroProv, setFiltroProv] = useState(false);
 
     const handleDrawerToggle = () => {
@@ -254,8 +253,7 @@ function Layout(props) {
                     setCuencasFiltradas(cuencas)
                     verCuencas(true)
                     verPozos(false)
-                    setFiltroDepa(false)
-                    setFiltroProv(false)
+                    setFiltroProv(Math.random())
                     //debugger
                 }}>
                     <ListItemButton selected={capaActivada.cuencas}>
@@ -277,7 +275,7 @@ function Layout(props) {
                 </ListItem>
             </List>
             <Divider />
-            {dataPozos.length > 0 ? <FiltroTablaPozos cambioProvinciaL={cambioProvincia} data={dataPozos} setTablaPozos={setTablaPozos} provv={filtroProv} depav={filtroDepa} /> : <></>}
+            {dataPozos.length > 0 ? <FiltroTablaPozos cambioProvinciaL={cambioProvincia} data={dataPozos} setTablaPozos={setTablaPozos} provv={filtroProv} /> : <></>}
         </div>
     );
 

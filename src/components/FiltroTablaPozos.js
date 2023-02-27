@@ -36,15 +36,13 @@ const FiltroTablaPozos = (props) => {
         setProvincias(provi)
     }, [data])
     useEffect(() => {
-        if (!provv) {
-            setProvinciaSeleccionada(false)
-        }
+        setProvinciaSeleccionada(false)
     }, [provv])
     return <List>
         <ListItem disablePadding>
             <ListItemButton>
                 <ListItemIcon>
-                    <WaterIcon />{provv}
+                    <WaterIcon />
                 </ListItemIcon>
                 <Select
                     id="label-provincias"
@@ -52,6 +50,7 @@ const FiltroTablaPozos = (props) => {
                     onChange={cambioProvincia}
                     defaultValue={false}
                     size="small"
+                    value={provinciaSeleccionada}
                 >
                     <MenuItem selected={true} value={false} label="Provincias">Provincias</MenuItem>
                     {provincias.map((r, i) => {
