@@ -216,6 +216,26 @@ function Layout(props) {
         verPozos(true)
         verCuencas(false)
     };
+    const pozosPorCuenca = (c) => {
+        //cuencas
+        //console.log(cuencas)
+        const features = cuencas.features.filter((r) => {
+            return r.properties.CUENCA === c
+        })
+        const filtradas = {
+            type: cuencas.type,
+            features: features,
+        }
+        setCuencasFiltradas(filtradas)
+        const pozosTemp = pozos.filter((r) => {
+            //debugger
+            return c.trim().toLowerCase() === r.cuenca.trim().toLowerCase()
+        });
+        setPozosFiltrados(pozosTemp)
+        setTablaPozos(pozosTemp)
+        verPozos(true)
+        verCuencas(true)
+    }
     const drawer = (
         <div>
             {/* <Toolbar /> */}
@@ -345,7 +365,7 @@ function Layout(props) {
                 <Toolbar />
                 <Grid container spacing={5} justifyContent="space-around">
                     <Grid item xs={12}>
-                        <MapView cuencas={cuencasFiltradas} setMap={setMap} markers={pozosFiltrados} provincias={provinciasFiltradas} />
+                        <MapView pozosPorCuenca={pozosPorCuenca} cuencas={cuencasFiltradas} setMap={setMap} markers={pozosFiltrados} provincias={provinciasFiltradas} />
                     </Grid>
                     <Grid item xs={12}>
                         {tablaPozos.length > 0 ? <ListadoDatos data={tablaPozos} /> : <></>}

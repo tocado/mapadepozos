@@ -4,16 +4,20 @@ import Markers from "./Markers";
 import { GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-const MapView = ({ cuencas = {}, setMap, markers, provincias } = {}) => {
+const MapView = ({ cuencas = {}, setMap, markers, provincias, pozosPorCuenca } = {}) => {
   if (cuencas.length === 0) {
     return <></>
   }
 
   const onEach = (feature, layer) => {
+    //pozosPorCuenca(feature.properties.CUENCA)
     let PopupContent = "<pre>" +
       JSON.stringify(feature.properties, null, " ").replace(/[{}"]/g, "") +
       "</pre>";
     layer.bindPopup(PopupContent)
+    layer.on({
+      click: () => pozosPorCuenca(feature.properties.CUENCA)
+    })
   }
 
   const layerStatus = {
