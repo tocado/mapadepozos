@@ -8,7 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Typography } from '@mui/material';
-
+import MenuDescargaDatos from './MenuDescargaDatos';
+import Grid from '@mui/material/Grid';
 
 export default function ListadoDatos({ data }) {
     const [page, setPage] = React.useState(0);
@@ -75,7 +76,18 @@ export default function ListadoDatos({ data }) {
 
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden', padding: 2 }}>
-            <Typography variant="h5">Listado de pozos</Typography>
+            <Grid
+                container
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center">
+                <Grid item xs="auto">
+                    <Typography variant="h5">Listado de pozos</Typography>
+                </Grid>
+                <Grid item xs="auto">
+                    <MenuDescargaDatos data={data} />
+                </Grid>
+            </Grid>
             <TableContainer>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
