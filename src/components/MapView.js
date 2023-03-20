@@ -4,19 +4,28 @@ import Markers from "./Markers";
 import { GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-const MapView = ({ cuencas = {}, setMap, markers, provincias, pozosPorCuenca } = {}) => {
+const MapView = ({ cuencas = {}, mapa, setMap, markers, provincias, pozosPorCuenca } = {}) => {
   if (cuencas.length === 0) {
     return <></>
   }
 
   const onEach = (feature, layer) => {
-    //pozosPorCuenca(feature.properties.CUENCA)
-    let PopupContent = "<pre>" +
-      JSON.stringify(feature.properties, null, " ").replace(/[{}"]/g, "") +
-      "</pre>";
-    layer.bindPopup(PopupContent)
     layer.on({
-      click: () => pozosPorCuenca(feature.properties.CUENCA)
+      click: (e) => {
+        debugger
+        let PopupContent = `<pre>Cuenca: ${feature.properties.CUENCA}
+Densidad: ${feature.properties.Densidad}
+Sistema: ${feature.properties.SISTEMA__S}
+Jurisdiccion: ${feature.properties.jurisdiccion}
+        </pre>`;
+        layer.bindPopup(PopupContent)
+        mapa.fitBounds(e.target.getBounds())        
+        pozosPorCuenca(feature.properties.CUENCA)
+        layer.openPopup()
+        /*e.stopPropagation()
+        e.preventDefault()*/
+        return 1
+      }
     })
   }
 

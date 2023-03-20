@@ -365,7 +365,7 @@ function Layout(props) {
                 <Toolbar />
                 <Grid container spacing={5} justifyContent="space-around">
                     <Grid item xs={12}>
-                        <MapView pozosPorCuenca={pozosPorCuenca} cuencas={cuencasFiltradas} setMap={setMap} markers={pozosFiltrados} provincias={provinciasFiltradas} />
+                        <MapView mapa={map} pozosPorCuenca={pozosPorCuenca} cuencas={cuencasFiltradas} setMap={setMap} markers={pozosFiltrados} provincias={provinciasFiltradas} />
                         <Typography align="right">seleccione una cuenca para ver sus respectivos pozos</Typography>
                     </Grid>
                     <Grid item xs={12}>
