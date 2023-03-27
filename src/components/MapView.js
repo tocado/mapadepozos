@@ -14,9 +14,7 @@ const MapView = ({ cuencas = {}, mapa, setMap, markers, provincias, pozosPorCuen
       click: (e) => {
         debugger
         let PopupContent = `<pre>Cuenca: ${feature.properties.CUENCA}
-Densidad: ${feature.properties.Densidad}
 Sistema: ${feature.properties.SISTEMA__S}
-Jurisdiccion: ${feature.properties.jurisdiccion}
         </pre>`;
         layer.bindPopup(PopupContent)
         mapa.fitBounds(e.target.getBounds())        

@@ -10,9 +10,14 @@ import TableRow from '@mui/material/TableRow';
 import { Typography } from '@mui/material';
 import MenuDescargaDatos from './MenuDescargaDatos';
 import Grid from '@mui/material/Grid';
+import TableSortLabel from '@mui/material/TableSortLabel';
+import Box from '@mui/material/Box';
+import { visuallyHidden } from '@mui/utils';
 
 export default function ListadoDatos({ data }) {
     const [page, setPage] = React.useState(0);
+    const [order, setOrder] = React.useState('asc');
+    const [orderBy, setOrderBy] = React.useState('');
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -68,12 +73,43 @@ export default function ListadoDatos({ data }) {
             align: 'right',
         },
     ]
-
+    function stableSort(array, comparator) {
+        const stabilizedThis = array.map((el, index) => [el, index]);
+        stabilizedThis.sort((a, b) => {
+            const order = comparator(a[0], b[0]);
+            if (order !== 0) {
+                return order;
+            }
+            return a[1] - b[1];
+        });
+        return stabilizedThis.map((el) => el[0]);
+    }
+    function descendingComparator(a, b, orderBy) {
+        if (b[orderBy] < a[orderBy]) {
+            return -1;
+        }
+        if (b[orderBy] > a[orderBy]) {
+            return 1;
+        }
+        return 0;
+    }
+    function getComparator(order, orderBy) {
+        return order === 'desc'
+            ? (a, b) => descendingComparator(a, b, orderBy)
+            : (a, b) => -descendingComparator(a, b, orderBy);
+    }
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-
+    const handleRequestSort = (event, property) => {
+        const isAsc = orderBy === property && order === 'asc';
+        setOrder(isAsc ? 'desc' : 'asc');
+        setOrderBy(property);
+    };
+    const createSortHandler = (property) => (event) => {
+        handleRequestSort(event, property);
+    };
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden', padding: 2 }}>
             <Grid
@@ -98,13 +134,25 @@ export default function ListadoDatos({ data }) {
                                     align={column.align}
                                     style={{ minWidth: column.minWidth, fontWeight: "bolder" }}
                                 >
-                                    {column.label}
+                                    <TableSortLabel
+                                        active={orderBy === column.id}
+                                        direction={orderBy === column.id ? order : 'asc'}
+                                        onClick={createSortHandler(column.id)}
+                                    >
+                                        {column.label}
+                                        {orderBy === column.id ? (
+                                            <Box component="span" sx={visuallyHidden}>
+                                                {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                                            </Box>
+                                        ) : null}
+                                    </TableSortLabel>
+
                                 </TableCell>
                             ))}
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data
+                        {stableSort(data, getComparator(order, orderBy))
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row, i) => {
                                 return (
