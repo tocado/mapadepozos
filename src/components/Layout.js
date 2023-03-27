@@ -58,7 +58,7 @@ function Layout(props) {
             // description: o.desc,
             // provincia: o.Provincia,
             ...o,
-            name: <>
+            names: <>
                 <h5>{o.name}</h5>
                 <table>
                     <tr>

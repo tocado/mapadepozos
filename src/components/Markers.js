@@ -19,7 +19,7 @@ const Markers = (props) => {
     TmpMarkers = markers.map((m, i) => (
       <Marker key={i} position={m.geometry} icon={markerIcon}>
         <MarkerPopup data={m} />
-        <Tooltip>{m.name}</Tooltip>
+        <Tooltip>{m.names}</Tooltip>
       </Marker>
       // <Circle key={i} center={m.geometry} pathOptions={{ color: 'red' }} radius={100}>
       //   <MarkerPopup data={m} />
