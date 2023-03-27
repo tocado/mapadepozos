@@ -322,7 +322,7 @@ function Layout(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Sistema de información de aguas subterr&aacute;neas
+                    SIAS - Sistema de información de aguas subterr&aacute;neas
                     </Typography>
                 </Toolbar>
             </AppBar>
