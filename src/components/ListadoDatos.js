@@ -13,6 +13,10 @@ import Grid from '@mui/material/Grid';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Box from '@mui/material/Box';
 import { visuallyHidden } from '@mui/utils';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { styled } from '@mui/material/styles';
+import InfoIcon from '@mui/icons-material/Info';
+import Stack from '@mui/material/Stack';
 
 export default function ListadoDatos({ data }) {
     const [page, setPage] = React.useState(0);
@@ -24,6 +28,14 @@ export default function ListadoDatos({ data }) {
     };
 
     const columns = [
+        {
+            id: 'name',
+            label: 'ID Pozo',
+            minWidth: 170,
+            align: 'left',
+            format: (value) => value.toFixed(2),
+            descripcion: "Código de identificación del pozo a nivel nacional",
+        },
         {
             id: 'Provincia',
             label: 'Provincia',
@@ -47,30 +59,42 @@ export default function ListadoDatos({ data }) {
             id: 'fecha',
             label: 'Fecha',
             minWidth: 50,
+            descripcion: "Fecha de construcción o de registro del pozo",
         },
         {
             id: 'Profundidad',
-            label: 'Profundidad',
+            label: 'Profundidad (m)',
             minWidth: 20,
             align: 'right',
+            descripcion: "Profundidad total del pozo en metros, según registro provincial",
         },
         {
             id: 'NivelEstatico',
-            label: 'Nivel Estatico',
+            label: 'NE (m)',
             minWidth: 20,
             align: 'right',
+            descripcion: "Nivel estático del agua en el pozo, medido en metro, al inicio de la operación o en fecha posterior",
         },
         {
             id: 'NivelDinamico',
-            label: 'Nivel Dinamico',
+            label: 'ND (m)',
             minWidth: 20,
             align: 'right',
+            descripcion: "Nivel dinámico del agua en el pozo, medido en metro, al inicio de la operación o en fecha posterior",
         },
         {
             id: 'Caudalmedio',
-            label: 'Caudal Medio',
+            label: 'Caudal (m3/h)',
             minWidth: 20,
             align: 'right',
+            descripcion: "Caudal característico del pozo en m3/h",
+        },
+        {
+            id: 'DuenioDelDato',
+            label: 'Fuente',
+            minWidth: 20,
+            align: 'right',
+            descripcion: "Proveedor del dato",
         },
     ]
     function stableSort(array, comparator) {
@@ -110,6 +134,17 @@ export default function ListadoDatos({ data }) {
     const createSortHandler = (property) => (event) => {
         handleRequestSort(event, property);
     };
+    const HtmlTooltip = styled(({ className, ...props }) => (
+        <Tooltip {...props} classes={{ popper: className }} />
+    ))(({ theme }) => ({
+        [`& .${tooltipClasses.tooltip}`]: {
+            backgroundColor: '#f5f5f9',
+            color: 'rgba(0, 0, 0, 0.87)',
+            maxWidth: 220,
+            fontSize: theme.typography.pxToRem(12),
+            border: '1px solid #dadde9',
+        },
+    }));
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden', padding: 2 }}>
             <Grid
@@ -125,21 +160,34 @@ export default function ListadoDatos({ data }) {
                 </Grid>
             </Grid>
             <TableContainer>
-                <Table stickyHeader aria-label="sticky table">
+                <Table stickyHeader aria-label="sticky table" size="small">
                     <TableHead>
                         <TableRow>
                             {columns.map((column, i) => (
                                 <TableCell
                                     key={column.id + i}
                                     align={column.align}
-                                    style={{ minWidth: column.minWidth, fontWeight: "bolder" }}
+                                    style={{ fontWeight: "bolder" }}
                                 >
                                     <TableSortLabel
                                         active={orderBy === column.id}
                                         direction={orderBy === column.id ? order : 'asc'}
                                         onClick={createSortHandler(column.id)}
                                     >
-                                        {column.label}
+                                        {column.descripcion ? <HtmlTooltip
+                                            title={
+                                                <>
+                                                    <Typography color="inherit"><b><i>{column.label}</i></b></Typography>
+                                                    <em>{column.descripcion}</em>
+                                                </>
+                                            }
+                                        >
+                                            <Stack direction="row" alignItems="center" gap={1}>
+                                                <InfoIcon sx={{ fontSize: 15 }} />
+                                                <typography xclassName="inlinenowrap">{column.label}</typography>
+                                            </Stack>
+                                        </HtmlTooltip> : <typography>{column.label}</typography>
+                                        }
                                         {orderBy === column.id ? (
                                             <Box component="span" sx={visuallyHidden}>
                                                 {order === 'desc' ? 'sorted descending' : 'sorted ascending'}

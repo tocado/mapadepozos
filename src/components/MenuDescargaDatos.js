@@ -7,14 +7,16 @@ import { CSVLink } from "react-csv";
 
 export default function MenuDescargaDatos({ data }) {
     const headers = [
+        { label: "ID Pozo", key: "name" },
         { label: "Provincia", key: "Provincia" },
         { label: "Departamento", key: "Departamento" },
         { label: "Uso", key: "Uso" },
         { label: "Fecha", key: "fecha" },
-        { label: "Profundidad", key: "Profundidad" },
-        { label: "Nivel Estatico", key: "NivelEstatico" },
-        { label: "Nivel Dinamico", key: "NivelDinamico" },
-        { label: "Caudal Medio", key: "Caudalmedio" },
+        { label: "Profundidad (m)", key: "Profundidad" },
+        { label: "NE (m)", key: "NivelEstatico" },
+        { label: "ND (m)", key: "NivelDinamico" },
+        { label: "Caudal (m3/h)", key: "Caudalmedio" },
+        { label: "Fuente", key: "DuenioDelDato" },
     ]
     const csvReport = {
         data: data,
@@ -122,7 +124,7 @@ export default function MenuDescargaDatos({ data }) {
             >
                 <MenuItem onClick={handleClose} disableRipple>
                     <Button>
-                        <CSVLink style={{textDecoration: "none", color: "#1976d2"}} {...csvReport}>CSV</CSVLink>
+                        <CSVLink separator={";"} style={{textDecoration: "none", color: "#1976d2"}} {...csvReport}>CSV</CSVLink>
                     </Button>
                 </MenuItem>
                 <MenuItem disableRipple>
