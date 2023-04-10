@@ -1,3 +1,6 @@
 .leaflet-container {
   height: 60vh;
 }
+.filtroPozosCampo {
+  margin: 4px
+}

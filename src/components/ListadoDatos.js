@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -17,16 +17,72 @@ import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
 import InfoIcon from '@mui/icons-material/Info';
 import Stack from '@mui/material/Stack';
+import { useSelector } from 'react-redux'
+import { traeFiltro } from '../reducers/RfiltroPozos';
+export default function ListadoDatos({ data, FiltroDataPozos }) {
+    const [page, setPage] = useState(0);
+    const [order, setOrder] = useState('asc');
+    const [orderBy, setOrderBy] = useState('');
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [dataFinal, setDataFinal] = useState([]);
+    const filtro = useSelector(traeFiltro)
 
-export default function ListadoDatos({ data }) {
-    const [page, setPage] = React.useState(0);
-    const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('');
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
+    useEffect(() => {
+        console.log("useEffect")
+        setDataFinal(filtrarDatos(data))
+        console.log("endUseEffect")
+    }, [filtro])
 
+    const filtrarDatos = (array) => {
+        console.log("filtrarDatos")
+        const f = filtro;
+        return array.filter((r) => {
+            if (r.name.toLowerCase().includes(f.name.toLowerCase())) {
+                if (r.Provincia.toLowerCase().includes(f.Provincia.toLowerCase())) {
+                    if (r.Departamento.toLowerCase().includes(f.Departamento.toLowerCase())) {
+                        if (r.Uso.toLowerCase().includes(f.Uso.toLowerCase())) {
+                            if (r.DuenioDelDato.toLowerCase().includes(f.DuenioDelDato.toLowerCase())) {
+                                if (
+                                    (f.Profundidad.min === "" && f.Profundidad.max === "") ||
+                                    (f.Profundidad.max === "" && parseInt(r.Profundidad) >= parseInt(f.Profundidad.min)) ||
+                                    (f.Profundidad.min === "" && parseInt(r.Profundidad) <= parseInt(f.Profundidad.max)) ||
+                                    (parseInt(r.Profundidad) >= parseInt(f.Profundidad.min) && parseInt(r.Profundidad) <= parseInt(f.Profundidad.max))
+                                ) {
+                                    if (
+                                        (f.NivelEstatico.min === "" && f.NivelEstatico.max === "") ||
+                                        (f.NivelEstatico.max === "" && parseInt(r.NivelEstatico) >= parseInt(f.NivelEstatico.min)) ||
+                                        (f.NivelEstatico.min === "" && parseInt(r.NivelEstatico) <= parseInt(f.NivelEstatico.max)) ||
+                                        (parseInt(r.NivelEstatico) >= parseInt(f.NivelEstatico.min) && parseInt(r.NivelEstatico) <= parseInt(f.NivelEstatico.max))
+                                    ) {
+                                        if (
+                                            (f.NivelDinamico.min === "" && f.NivelDinamico.max === "") ||
+                                            (f.NivelDinamico.max === "" && parseInt(r.NivelDinamico) >= parseInt(f.NivelDinamico.min)) ||
+                                            (f.NivelDinamico.min === "" && parseInt(r.NivelDinamico) <= parseInt(f.NivelDinamico.max)) ||
+                                            (parseInt(r.NivelDinamico) >= parseInt(f.NivelDinamico.min) && parseInt(r.NivelDinamico) <= parseInt(f.NivelDinamico.max))
+                                        ) {
+                                            if (
+                                                (f.Caudalmedio.min === "" && f.Caudalmedio.max === "") ||
+                                                (f.Caudalmedio.max === "" && parseInt(r.Caudalmedio) >= parseInt(f.Caudalmedio.min)) ||
+                                                (f.Caudalmedio.min === "" && parseInt(r.Caudalmedio) <= parseInt(f.Caudalmedio.max)) ||
+                                                (parseInt(r.Caudalmedio) >= parseInt(f.Caudalmedio.min) && parseInt(r.Caudalmedio) <= parseInt(f.Caudalmedio.max))
+                                            ) {
+                                                return r
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return false
+        })
+    }
     const columns = [
         {
             id: 'name',
@@ -98,6 +154,7 @@ export default function ListadoDatos({ data }) {
         },
     ]
     function stableSort(array, comparator) {
+        console.log("stableSort")
         const stabilizedThis = array.map((el, index) => [el, index]);
         stabilizedThis.sort((a, b) => {
             const order = comparator(a[0], b[0]);
@@ -200,9 +257,8 @@ export default function ListadoDatos({ data }) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {stableSort(data, getComparator(order, orderBy))
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((row, i) => {
+                        {stableSort(dataFinal, getComparator(order, orderBy))
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, i) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={i}>
                                         {columns.map((column) => {

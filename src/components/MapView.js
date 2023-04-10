@@ -12,7 +12,7 @@ const MapView = ({ cuencas = {}, mapa, setMap, markers, provincias, pozosPorCuen
   const onEach = (feature, layer) => {
     layer.on({
       click: (e) => {
-        debugger
+       // debugger
         let PopupContent = `<pre>Cuenca: ${feature.properties.CUENCA}
 Sistema: ${feature.properties.SISTEMA__S}
         </pre>`;
@@ -37,7 +37,8 @@ Sistema: ${feature.properties.SISTEMA__S}
   return (
     <MapContainer center={layerStatus.posicion} zoom={layerStatus.zoom} ref={setMap}>
       <TileLayer
-        url="https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_topo@EPSG%3A3857@png/{z}/{x}/{-y}.png"
+        old_url="https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_topo@EPSG%3A3857@png/{z}/{x}/{-y}.png"
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       <LayersControl position="topright" >

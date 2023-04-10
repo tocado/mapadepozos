@@ -25,6 +25,7 @@ import provincias from "./provincias.json"
 import ListadoDatos from "./ListadoDatos"
 import logo from '../assets/logo.jpg'
 import FiltroTablaPozos from './FiltroTablaPozos'
+import FiltroCamposTablaPozos from "./FiltroCamposTablaPozos";
 const drawerWidth = 240;
 
 function Layout(props) {
@@ -41,6 +42,64 @@ function Layout(props) {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [tablaPozos, setTablaPozos] = useState([]);
     const [filtroProv, setFiltroProv] = useState(false);
+    const [FiltroDataPozos, setFiltroDataPozos] = useState({
+        name: "",
+        Provincia: "",
+        Departamento: "",
+        Uso: "",
+        fecha: {
+            min: "",
+            max: "",
+        },
+        Profundidad: {
+            min: "",
+            max: "",
+        },
+        NivelEstatico: {
+            min: "",
+            max: "",
+        },
+        NivelDinamico: {
+            min: "",
+            max: "",
+        },
+        Caudalmedio: {
+            min: "",
+            max: "",
+        },
+        DuenioDelDato: "",
+    })
+    const setFiltroDatos = (filtro) => {
+        console.log("setFiltroDatos")
+        setFiltroDataPozos({
+            name: filtro.name,
+            Provincia: filtro.Provincia,
+            Departamento: filtro.Departamento,
+            Uso: filtro.Uso,
+            fecha: {
+                min: filtro.fechamin,
+                max: filtro.fechamax,
+            },
+            Profundidad: {
+                min: filtro.Profundidadmin,
+                max: filtro.Profundidadmax,
+            },
+            NivelEstatico: {
+                min: filtro.NivelEstaticomin,
+                max: filtro.NivelEstaticomax,
+            },
+            NivelDinamico: {
+                min: filtro.NivelDinamicomin,
+                max: filtro.NivelDinamicomax,
+            },
+            Caudalmedio: {
+                min: filtro.Caudalmediomin,
+                max: filtro.Caudalmediomax,
+            },
+            DuenioDelDato: filtro.DuenioDelDato,
+        })
+        console.log("endSetFiltroDatos")
+    }
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -239,7 +298,7 @@ function Layout(props) {
     const drawer = (
         <div>
             {/* <Toolbar /> */}
-            <img 
+            <img
                 src={logo}
                 width={drawerWidth}
                 style={{
@@ -249,7 +308,7 @@ function Layout(props) {
                     margin: "0px",
                 }}
                 alt="logo"
-            />            
+            />
             <List>
                 <ListItem disablePadding onClick={() => {
                     setProvinciasFiltradas(provincias)
@@ -296,6 +355,13 @@ function Layout(props) {
             </List>
             <Divider />
             {dataPozos.length > 0 ? <FiltroTablaPozos cambioProvinciaL={cambioProvincia} data={dataPozos} setTablaPozos={setTablaPozos} provv={filtroProv} /> : <></>}
+            {tablaPozos.length ?
+                <>
+                    <Divider />
+                    <FiltroCamposTablaPozos datos={tablaPozos} setFiltroDatos={setFiltroDatos} />
+                </> :
+                <></>
+            }
         </div>
     );
 
@@ -322,7 +388,7 @@ function Layout(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                    SIAS - Sistema de información de aguas subterr&aacute;neas
+                        SIAS - Sistema de información de aguas subterr&aacute;neas
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -369,7 +435,7 @@ function Layout(props) {
                         <Typography align="right">seleccione una cuenca para ver sus respectivos pozos</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        {tablaPozos.length > 0 ? <ListadoDatos data={tablaPozos} /> : <></>}
+                        {tablaPozos.length > 0 ? <ListadoDatos data={tablaPozos} FiltroDataPozos={FiltroDataPozos} /> : <></>}
                     </Grid>
                 </Grid>
             </Box>
