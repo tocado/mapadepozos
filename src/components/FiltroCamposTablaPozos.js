@@ -127,9 +127,10 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                                 size="small"
                                 type="date"
                                 inputProps={{style: { fontSize: 12 }}}
-                                InputLabelProps={{style: { fontSize: 12 }}}
+                                InputLabelProps={{style: { fontSize: 9 }}}
                                 onChange={handleInputChange}
                                 value={filtro.fechamin}
+                                variant="filled"
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -139,8 +140,9 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                                 name="fechamax"
                                 type="date"
                                 inputProps={{style: { fontSize: 12 }}}
-                                InputLabelProps={{style: { fontSize: 12 }}}                                
+                                InputLabelProps={{style: { fontSize: 9 }}}                                
                                 size="small"
+                                variant="filled"
                                 onChange={handleInputChange}
                                 value={filtro.fechamax}
                             />
