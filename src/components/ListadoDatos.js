@@ -40,6 +40,7 @@ export default function ListadoDatos({ data, FiltroDataPozos }) {
         console.log("filtrarDatos")
         const f = filtro;
         return array.filter((r) => {
+            let rfecha = new Date()
             if (r.name.toLowerCase().includes(f.name.toLowerCase())) {
                 if (r.Provincia.toLowerCase().includes(f.Provincia.toLowerCase())) {
                     if (r.Departamento.toLowerCase().includes(f.Departamento.toLowerCase())) {
@@ -69,7 +70,15 @@ export default function ListadoDatos({ data, FiltroDataPozos }) {
                                                 (f.Caudalmedio.min === "" && parseInt(r.Caudalmedio) <= parseInt(f.Caudalmedio.max)) ||
                                                 (parseInt(r.Caudalmedio) >= parseInt(f.Caudalmedio.min) && parseInt(r.Caudalmedio) <= parseInt(f.Caudalmedio.max))
                                             ) {
-                                                return r
+                                                rfecha = new Date(r.fecha.split("-")[2], r.fecha.split("-")[1] - 1, r.fecha.split("-")[0])
+                                                if (
+                                                    (f.fecha.min === "" && f.fecha.max === "") ||
+                                                    (f.fecha.max === "" && rfecha >= new Date(f.fecha.min)) ||
+                                                    (f.fecha.min === "" && rfecha <= new Date(f.fecha.max)) ||
+                                                    (rfecha >= new Date(f.fecha.min) && rfecha <= new Date(f.fecha.max))
+                                                ) {
+                                                    return r
+                                                }
                                             }
                                         }
                                     }
@@ -166,6 +175,17 @@ export default function ListadoDatos({ data, FiltroDataPozos }) {
         return stabilizedThis.map((el) => el[0]);
     }
     function descendingComparator(a, b, orderBy) {
+        if (orderBy === "fecha") {
+            const aa = new Date(a[orderBy].split("-")[2],a[orderBy].split("-")[1]-1,a[orderBy].split("-")[0])
+            const bb = new Date(b[orderBy].split("-")[2],b[orderBy].split("-")[1]-1,b[orderBy].split("-")[0])
+            if (bb < aa) {
+                return -1;
+            }
+            if (bb > aa) {
+                return 1;
+            }            
+        }
+
         if (b[orderBy] < a[orderBy]) {
             return -1;
         }
