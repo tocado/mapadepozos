@@ -26,6 +26,8 @@ import ListadoDatos from "./ListadoDatos"
 import logo from '../assets/logo.jpg'
 import FiltroTablaPozos from './FiltroTablaPozos'
 import FiltroCamposTablaPozos from "./FiltroCamposTablaPozos";
+import Switch from '@mui/material/Switch';
+
 const drawerWidth = 240;
 
 function Layout(props) {
@@ -295,6 +297,13 @@ function Layout(props) {
         verPozos(true)
         verCuencas(true)
     }
+    const cambioMapa = (e) => {
+        if (e.target.checked) {
+            map._layers[27].setUrl("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+        } else {
+            map._layers[27].setUrl("https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_topo@EPSG%3A3857@png/{z}/{x}/{-y}.png")
+        }
+    }
     const drawer = (
         <div>
             {/* <Toolbar /> */}
@@ -378,18 +387,16 @@ function Layout(props) {
                 }}
             >
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        SIAS - Sistema de información de aguas subterr&aacute;neas
-                    </Typography>
+                    <Grid container spacing={0} justifyContent="space-between" alignItems="center">
+                        <Grid item xs={10}>
+                            <Typography variant="h6" noWrap component="div">
+                                SIAS - Sistema de información de aguas subterr&aacute;neas
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={2} sx={{ textAlign: "right" }}>
+                            IGN <Switch defaultChecked color="default" value="OSM" onChange={cambioMapa} /> OSM
+                        </Grid>
+                    </Grid>
                 </Toolbar>
             </AppBar>
             <Box
