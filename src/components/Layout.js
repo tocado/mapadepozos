@@ -122,7 +122,7 @@ function Layout(props) {
                 <table>
                     <tr>
                         <th>
-                            Nombre
+                            ID Pozo
                         </th>
                         <td>
                             {o.name}
@@ -130,7 +130,7 @@ function Layout(props) {
                     </tr>
                     <tr>
                         <th>
-                            Caudal Medio
+                            Caudal (m3/h)
                         </th>
                         <td>
                             {o.Caudalmedio || '-'}
@@ -138,7 +138,7 @@ function Layout(props) {
                     </tr>
                     <tr>
                         <th>
-                            Profundiad
+                            Profundidad (m)
                         </th>
                         <td>
                             {o.Profundidad || '-'}
@@ -146,7 +146,7 @@ function Layout(props) {
                     </tr>
                     <tr>
                         <th>
-                            NivelDinamico
+                            ND (m)
                         </th>
                         <td>
                             {o.NivelDinamico || '-'}
@@ -154,7 +154,7 @@ function Layout(props) {
                     </tr>
                     <tr>
                         <th>
-                            NivelEstatico
+                            NE (m)
                         </th>
                         <td>
                             {o.NivelEstatico || '-'}
@@ -313,9 +313,17 @@ function Layout(props) {
     }
     const cambioMapa = (e) => {
         if (e.target.checked) {
-            map._layers[27].setUrl("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+            map.eachLayer((l) => {
+                if(l._url) {
+                    l.setUrl("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+                }
+            })            
         } else {
-            map._layers[27].setUrl("https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_topo@EPSG%3A3857@png/{z}/{x}/{-y}.png")
+            map.eachLayer((l) => {
+                if(l._url) {
+                    l.setUrl("https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_topo@EPSG%3A3857@png/{z}/{x}/{-y}.png")
+                }
+            })            
         }
     }
     const drawer = (
