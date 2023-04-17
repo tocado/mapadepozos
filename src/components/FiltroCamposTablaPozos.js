@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Grid } from '@mui/material';
+import { TextField, Grid, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import { useDispatch } from 'react-redux'
 import { setFiltro } from '../reducers/RfiltroPozos';
 
@@ -50,7 +50,7 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                 max: f.Caudalmediomax,
             },
             DuenioDelDato: f.DuenioDelDato,
-        }))        
+        }))
     }
     useEffect(() => {
         let usosTemp = datos.map((d, i) => {
@@ -58,7 +58,7 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
         })
         const usost = [...new Set(usosTemp)];
         setUsos(usost)
-    }, [datos])    
+    }, [datos])
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFiltros((prevState) => {
@@ -75,17 +75,25 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                     m: 1,
                 }}>
                 <Grid item xs={12} className="filtroPozosCampo">
-                    <TextField
-                        label="Uso"
-                        name="Uso"
-                        variant="outlined"
-                        size="small"
-                        onChange={handleInputChange}
-                        value={filtro.Uso}
-                        inputProps={{style: { fontSize: 12 }}}
-                        InputLabelProps={{style: { fontSize: 12 }}}
-                    />
-                    {JSON.stringify(usos)}
+                    <FormControl sx={{ minWidth: 100 }} size="small">
+                        <InputLabel id="label-usos">Uso</InputLabel>
+                        <Select
+                            labelId="label-usos"
+                            label="Usos"
+                            name="Uso"
+                            onChange={handleInputChange}
+                            defaultValue=""
+                            size="small"
+                            value={filtro.Uso}
+                        >
+                            <MenuItem value={""} label="todos">Todos</MenuItem>
+                            {usos.map((r, i) => {
+                                return (
+                                    <MenuItem key={i} value={r}>{r}</MenuItem>
+                                )
+                            })}
+                        </Select>
+                    </FormControl>
                 </Grid>
 
                 <Grid item xs={11}>
@@ -96,8 +104,8 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                                 name="fechamin"
                                 size="small"
                                 type="date"
-                                inputProps={{style: { fontSize: 12 }}}
-                                InputLabelProps={{style: { fontSize: 9 }}}
+                                inputProps={{ style: { fontSize: 12 } }}
+                                InputLabelProps={{ style: { fontSize: 9 } }}
                                 onChange={handleInputChange}
                                 value={filtro.fechamin}
                                 variant="filled"
@@ -109,8 +117,8 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                                 label="Fecha Max"
                                 name="fechamax"
                                 type="date"
-                                inputProps={{style: { fontSize: 12 }}}
-                                InputLabelProps={{style: { fontSize: 9 }}}                                
+                                inputProps={{ style: { fontSize: 12 } }}
+                                InputLabelProps={{ style: { fontSize: 9 } }}
                                 size="small"
                                 variant="filled"
                                 onChange={handleInputChange}
@@ -130,8 +138,8 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                                 variant="outlined"
                                 size="small"
                                 type="number"
-                                inputProps={{style: { fontSize: 12 }}}
-                                InputLabelProps={{style: { fontSize: 10 }}}
+                                inputProps={{ style: { fontSize: 12 } }}
+                                InputLabelProps={{ style: { fontSize: 10 } }}
                                 onChange={handleInputChange}
                                 value={filtro.Profundidadmin}
                             />
@@ -142,8 +150,8 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                                 label="Prof Max"
                                 name="Profundidadmax"
                                 type="number"
-                                inputProps={{style: { fontSize: 12 }}}
-                                InputLabelProps={{style: { fontSize: 10 }}}                                
+                                inputProps={{ style: { fontSize: 12 } }}
+                                InputLabelProps={{ style: { fontSize: 10 } }}
                                 variant="outlined"
                                 size="small"
                                 onChange={handleInputChange}
@@ -162,8 +170,8 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                                 variant="outlined"
                                 size="small"
                                 type="number"
-                                inputProps={{style: { fontSize: 12 }}}
-                                InputLabelProps={{style: { fontSize: 10 }}}
+                                inputProps={{ style: { fontSize: 12 } }}
+                                InputLabelProps={{ style: { fontSize: 10 } }}
                                 onChange={handleInputChange}
                                 value={filtro.Caudalmediomin}
                             />
@@ -174,8 +182,8 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                                 label="Caudal Max"
                                 name="Caudalmediomax"
                                 type="number"
-                                inputProps={{style: { fontSize: 12 }}}
-                                InputLabelProps={{style: { fontSize: 10 }}}                                
+                                inputProps={{ style: { fontSize: 12 } }}
+                                InputLabelProps={{ style: { fontSize: 10 } }}
                                 variant="outlined"
                                 size="small"
                                 onChange={handleInputChange}
@@ -192,8 +200,8 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                         size="small"
                         onChange={handleInputChange}
                         value={filtro.DuenioDelDato}
-                        inputProps={{style: { fontSize: 12 }}}
-                        InputLabelProps={{style: { fontSize: 12 }}}
+                        inputProps={{ style: { fontSize: 12 } }}
+                        InputLabelProps={{ style: { fontSize: 12 } }}
                     />
                 </Grid>
             </Grid>

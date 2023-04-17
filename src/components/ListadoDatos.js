@@ -34,6 +34,7 @@ export default function ListadoDatos({ data, FiltroDataPozos }) {
         console.log("useEffect")
         setDataFinal(filtrarDatos(data))
         console.log("endUseEffect")
+// eslint-disable-next-line        
     }, [filtro, data])
 
     const filtrarDatos = (array) => {
