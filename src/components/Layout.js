@@ -184,6 +184,22 @@ function Layout(props) {
                             {o.DuenioDelDato || '-'}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            Latitud
+                        </th>
+                        <td>
+                            {o.x || '-'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Long
+                        </th>
+                        <td>
+                            {o.y || '-'}
+                        </td>
+                    </tr>
                 </table>
             </>,
             geometry: [
