@@ -68,45 +68,6 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                 }}>
                 <Grid item xs={12} className="filtroPozosCampo">
                     <TextField
-                        label="ID Pozo"
-                        name="name"
-                        variant="outlined"
-                        size="small"
-                        onChange={handleInputChange}
-                        inputProps={{style: { fontSize: 12 }}}
-                        InputLabelProps={{style: { fontSize: 12 }}}
-                    />
-                </Grid>
-
-                <Grid item xs={12} className="filtroPozosCampo">
-                    <TextField
-                        label="Provincia"
-                        name="Provincia"
-                        variant="outlined"
-                        size="small"
-                        className="filtroPozosCampo"
-                        onChange={handleInputChange}
-                        value={filtro.Provincia}
-                        inputProps={{style: { fontSize: 12 }}}
-                        InputLabelProps={{style: { fontSize: 12 }}}
-                    />
-                </Grid>
-
-                <Grid item xs={12} className="filtroPozosCampo">
-                    <TextField
-                        label="Departamento"
-                        name="Departamento"
-                        variant="outlined"
-                        size="small"
-                        onChange={handleInputChange}
-                        value={filtro.Departamento}
-                        inputProps={{style: { fontSize: 12 }}}
-                        InputLabelProps={{style: { fontSize: 12 }}}
-                    />
-                </Grid>
-
-                <Grid item xs={12} className="filtroPozosCampo">
-                    <TextField
                         label="Uso"
                         name="Uso"
                         variant="outlined"
@@ -183,69 +144,6 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                     </Grid>
                 </Grid>
 
-                <Grid item xs={11}>
-                    <Grid container justifyContent="flex-start">
-                        <Grid item xs={6}>
-                            <TextField
-                                label="NE (m) Min"
-                                name="NivelEstaticomin"
-                                variant="outlined"
-                                size="small"
-                                type="number"
-                                inputProps={{style: { fontSize: 12 }}}
-                                InputLabelProps={{style: { fontSize: 10 }}}
-                                onChange={handleInputChange}
-                                value={filtro.NivelEstaticomin}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                sx={{ fontSize: "3px" }}
-                                label="NE (m) Max"
-                                name="NivelEstaticomax"
-                                type="number"
-                                inputProps={{style: { fontSize: 12 }}}
-                                InputLabelProps={{style: { fontSize: 10 }}}                                
-                                variant="outlined"
-                                size="small"
-                                onChange={handleInputChange}
-                                value={filtro.NivelEstaticomax}
-                            />
-                        </Grid>
-                    </Grid>
-                </Grid>
-
-                <Grid item xs={11}>
-                    <Grid container justifyContent="flex-start">
-                        <Grid item xs={6}>
-                            <TextField
-                                label="ND (m) Min"
-                                name="NivelDinamicomin"
-                                variant="outlined"
-                                size="small"
-                                type="number"
-                                inputProps={{style: { fontSize: 12 }}}
-                                InputLabelProps={{style: { fontSize: 10 }}}
-                                onChange={handleInputChange}
-                                value={filtro.NivelDinamicomin}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                sx={{ fontSize: "3px" }}
-                                label="ND (m) Max"
-                                name="NivelDinamicomax"
-                                type="number"
-                                inputProps={{style: { fontSize: 12 }}}
-                                InputLabelProps={{style: { fontSize: 10 }}}                                
-                                variant="outlined"
-                                size="small"
-                                onChange={handleInputChange}
-                                value={filtro.NivelDinamicodmax}
-                            />
-                        </Grid>
-                    </Grid>
-                </Grid>
                 <Grid item xs={11}>
                     <Grid container justifyContent="flex-start">
                         <Grid item xs={6}>
