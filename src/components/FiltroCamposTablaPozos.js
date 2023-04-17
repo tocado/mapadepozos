@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Grid } from '@mui/material';
 import { useDispatch } from 'react-redux'
 import { setFiltro } from '../reducers/RfiltroPozos';
 
 const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
     const dispatch = useDispatch()
+    const [usos, setUsos] = useState([])
     const [filtro, setFiltros] = useState({
         name: "",
         Provincia: "",
@@ -21,7 +22,7 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
         Caudalmediomin: "",
         Caudalmediomax: "",
         DuenioDelDato: "",
-    });
+    })
     const adecuarFiltro = (f) => {
         dispatch(setFiltro({
             name: f.name,
@@ -51,6 +52,13 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
             DuenioDelDato: f.DuenioDelDato,
         }))        
     }
+    useEffect(() => {
+        let usosTemp = datos.map((d, i) => {
+            return d.Uso
+        })
+        const usost = [...new Set(usosTemp)];
+        setUsos(usost)
+    }, [datos])    
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFiltros((prevState) => {
@@ -77,6 +85,7 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                         inputProps={{style: { fontSize: 12 }}}
                         InputLabelProps={{style: { fontSize: 12 }}}
                     />
+                    {JSON.stringify(usos)}
                 </Grid>
 
                 <Grid item xs={11}>

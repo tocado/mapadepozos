@@ -34,7 +34,7 @@ export default function ListadoDatos({ data, FiltroDataPozos }) {
         console.log("useEffect")
         setDataFinal(filtrarDatos(data))
         console.log("endUseEffect")
-    }, [filtro])
+    }, [filtro, data])
 
     const filtrarDatos = (array) => {
         console.log("filtrarDatos")
