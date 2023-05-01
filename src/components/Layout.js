@@ -25,11 +25,16 @@ import logo from '../assets/logo.jpg'
 import FiltroTablaPozos from './FiltroTablaPozos'
 import FiltroCamposTablaPozos from "./FiltroCamposTablaPozos";
 import Switch from '@mui/material/Switch';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const drawerWidth = 240;
 
 function Layout(props) {
     const [map, setMap] = useState(false)
+    const [urlMapa, setUrlMapa] = useState("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     const [capaActivada, setCapaActivada] = useState({
         cuencas: false,
         pozos: false,
@@ -312,19 +317,12 @@ function Layout(props) {
         verCuencas(true)
     }
     const cambioMapa = (e) => {
-        if (e.target.checked) {
-            map.eachLayer((l) => {
-                if(l._url) {
-                    l.setUrl("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
-                }
-            })            
-        } else {
-            map.eachLayer((l) => {
-                if(l._url) {
-                    l.setUrl("https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_topo@EPSG%3A3857@png/{z}/{x}/{-y}.png")
-                }
-            })            
-        }
+        setUrlMapa(e.target.value)
+        map.eachLayer((l) => {
+            if (l._url) {
+                l.setUrl(e.target.value)
+            }
+        })
     }
     const drawer = (
         <div>
@@ -416,7 +414,21 @@ function Layout(props) {
                             </Typography>
                         </Grid>
                         <Grid item xs={2} sx={{ textAlign: "right" }}>
-                            IGN <Switch defaultChecked color="default" value="OSM" onChange={cambioMapa} /> OSM
+                                <Select
+                                    sx={{ background: 'white'}}
+                                    value={urlMapa}
+                                    size="small"
+                                    onChange={cambioMapa}
+                                >
+                                    <MenuItem value={'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'}>OSM</MenuItem>
+                                    <MenuItem value={'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'}>Imagenes Satelitales Esri</MenuItem>
+                                    <MenuItem value={'https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}'}>Mapa Topografico Esri</MenuItem>
+                                    <MenuItem value={'https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png'}>Argenmap Base</MenuItem>
+                                    <MenuItem value={'https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_gris@EPSG%3A3857@png/{z}/{x}/{-y}.png'}>Argenmap Gris</MenuItem>
+                                    <MenuItem value={'https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/argenmap_oscuro@EPSG%3A3857@png/{z}/{x}/{-y}.png'}>Argenmap Oscuro</MenuItem>
+                                    <MenuItem value={'https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_topo@EPSG%3A3857@png/{z}/{x}/{-y}.png'}>Argenmap Topografico</MenuItem>
+                                    
+                                </Select>
                         </Grid>
                     </Grid>
                 </Toolbar>
