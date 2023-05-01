@@ -153,7 +153,6 @@ export default function ListadoDatos({ data, FiltroDataPozos }) {
             label: 'Caudal (m3/h)',
             minWidth: 20,
             align: 'right',
-            descripcion: "Caudal característico del pozo en m3/h",
         },
         {
             id: 'DuenioDelDato',
