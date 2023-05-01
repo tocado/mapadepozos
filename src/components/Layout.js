@@ -349,7 +349,7 @@ function Layout(props) {
                         <ListItemIcon>
                             <MyLocationIcon />
                         </ListItemIcon>
-                        <ListItemText primary={'Argentina'} />
+                        <ListItemText primary={'Restablecer Filtro'} />
                     </ListItemButton>
                 </ListItem>
             </List>
