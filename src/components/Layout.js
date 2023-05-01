@@ -24,17 +24,14 @@ import ListadoDatos from "./ListadoDatos"
 import logo from '../assets/logo.jpg'
 import FiltroTablaPozos from './FiltroTablaPozos'
 import FiltroCamposTablaPozos from "./FiltroCamposTablaPozos";
-import Switch from '@mui/material/Switch';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 const drawerWidth = 240;
 
 function Layout(props) {
     const [map, setMap] = useState(false)
-    const [urlMapa, setUrlMapa] = useState("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+    const [urlMapa, setUrlMapa] = useState("https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png")
     const [capaActivada, setCapaActivada] = useState({
         cuencas: false,
         pozos: false,
