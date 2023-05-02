@@ -185,7 +185,17 @@ export default function ListadoDatos({ data, FiltroDataPozos }) {
                 return 1;
             }            
         }
-
+        const valoresNumericos = ["Profundidad", "NivelEstatico","Caudalmedio", "NivelDinamico"]
+        if (valoresNumericos.indexOf(orderBy) !== -1) {
+            const aa = parseInt(a[orderBy]*1000)
+            const bb = parseInt(b[orderBy]*1000)
+            if (bb < aa) {
+                return -1;
+            }
+            if (bb > aa) {
+                return 1;
+            }            
+        }
         if (b[orderBy] < a[orderBy]) {
             return -1;
         }
