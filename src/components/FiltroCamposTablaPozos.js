@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Grid, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
+import { TextField, Grid, MenuItem, Select, InputLabel, FormControl, Button } from '@mui/material';
 import { useDispatch } from 'react-redux'
 import { setFiltro } from '../reducers/RfiltroPozos';
 
@@ -62,7 +62,7 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFiltros((prevState) => {
-            adecuarFiltro({ ...prevState, [name]: value })
+            //adecuarFiltro({ ...prevState, [name]: value })
             //setFiltroDatos({ ...prevState, [name]: value })
             return { ...prevState, [name]: value }
         });
@@ -192,7 +192,11 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                         </Grid>
                     </Grid>
                 </Grid>
-
+                <Grid item xs={12} className='filtroPozosCampo'>
+                    <Button onClick={() => adecuarFiltro(filtro)}>
+                        Filtrar
+                    </Button>
+                </Grid>
                 {/* <Grid item xs={12} className="filtroPozosCampo">
                     <TextField
                         label="Fuente"
