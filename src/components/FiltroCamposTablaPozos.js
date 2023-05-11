@@ -193,7 +193,7 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                     </Grid>
                 </Grid>
 
-                <Grid item xs={12} className="filtroPozosCampo">
+                {/* <Grid item xs={12} className="filtroPozosCampo">
                     <TextField
                         label="Fuente"
                         name="DuenioDelDato"
@@ -203,7 +203,7 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                         inputProps={{ style: { fontSize: 12 } }}
                         InputLabelProps={{ style: { fontSize: 12 } }}
                     />
-                </Grid>
+                </Grid> */}
             </Grid>
         </form >
     );
