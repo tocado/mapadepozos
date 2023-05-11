@@ -292,6 +292,7 @@ function Layout(props) {
         //debugger
         verPozos(true)
         verCuencas(false)
+
     };
     const pozosPorCuenca = (c) => {
         //cuencas
