@@ -30,7 +30,7 @@ const Markers = (props) => {
       // </Circle >
     ));
   }
-  return <MarkerClusterGroup maxClusterRadius={60} disableClusteringAtZoom={7}>{TmpMarkers}</MarkerClusterGroup>;
+  return <MarkerClusterGroup maxClusterRadius={60} disableClusteringAtZoom={6}>{TmpMarkers}</MarkerClusterGroup>;
 };
 
 export default Markers;
