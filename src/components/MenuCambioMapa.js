@@ -3,7 +3,6 @@ import { Button, MenuItem } from '@mui/material';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/material/Menu';
-import { CSVLink } from "react-csv";
 
 export default function MenuCambioMapa({ cambioMapa }) {
     const mapas = [

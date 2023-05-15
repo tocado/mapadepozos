@@ -16,7 +16,7 @@ import MapView from './MapView'
 import OpacityIcon from '@mui/icons-material/Opacity';
 import WaterIcon from '@mui/icons-material/Water';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { Grid, Paper } from '@mui/material';
+import { Grid } from '@mui/material';
 import * as topojson from "topojson-client";
 import dataPozos from '../assets/pozos.json'
 import provincias from "./provincias.json"
@@ -25,8 +25,6 @@ import logoCohife from '../assets/logo_COHIFE_transparente.png'
 import logoMinisterio from '../assets/logo_MINISTERIO.png'
 import FiltroTablaPozos from './FiltroTablaPozos'
 import FiltroCamposTablaPozos from "./FiltroCamposTablaPozos";
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import CircleIcon from '@mui/icons-material/Circle'
 import MenuCambioMapa from "./MenuCambioMapa";
 
@@ -34,7 +32,6 @@ const drawerWidth = 240;
 
 function Layout(props) {
     const [map, setMap] = useState(false)
-    const [urlMapa, setUrlMapa] = useState("https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png")
     const [capaActivada, setCapaActivada] = useState({
         cuencas: false,
         pozos: false,
@@ -213,8 +210,7 @@ function Layout(props) {
             ]
         }
     })
-    //const [pozosFiltrados, setPozosFiltrados] = useState(pozos)
-    const [pozosFiltrados, setPozosFiltrados] = useState([])
+    const [pozosFiltrados, setPozosFiltrados] = useState(pozos)
     const provinciasLocation = [
         { nombre: "CABA", pos: [-34.6038, -58.4253], z: 12 },
         { nombre: "Buenos Aires", pos: [-37.3003, -59.2601], z: 6 },
@@ -319,7 +315,6 @@ function Layout(props) {
         verCuencas(true)
     }
     const cambioMapa = (e) => {
-        setUrlMapa(e.target.value)
         map.eachLayer((l) => {
             if (l._url) {
                 l.setUrl(e.target.value)
@@ -421,7 +416,7 @@ function Layout(props) {
                             </Typography>
                         </Grid>
                         <Grid item xs={1} sx={{ textAlign: "right" }}>
-                            <img src={logoMinisterio} height="55" />
+                            <img src={logoMinisterio} height="55" alt="logo del ministerio"/>
                         </Grid>
                         <Grid item xs={2} sx={{ textAlign: "center" }}>
                             <Typography variant="body1" sx={{ fontWeight: 'bold', fontSize: 12, color: 'black' }}>
@@ -429,7 +424,7 @@ function Layout(props) {
                             </Typography>
                         </Grid>
                         <Grid item xs={1} sx={{ textAlign: "right" }}>
-                            <img src={logoCohife} height="35" />
+                            <img src={logoCohife} height="35" alt="logo cohife"/>
                         </Grid>
                     </Grid>
                 </Toolbar>
