@@ -110,6 +110,7 @@ export default function MenuDescargaDatos({ data }) {
                 disableElevation
                 onClick={handleClick}
                 endIcon={<KeyboardDoubleArrowDownIcon />}
+                sx={{background: '#9bddf6', color: 'black'}}
             >
                 Descarga
             </Button>

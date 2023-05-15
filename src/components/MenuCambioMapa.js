@@ -73,6 +73,7 @@ export default function MenuCambioMapa({ cambioMapa }) {
                 variant="contained"
                 disableElevation
                 onClick={handleClick}
+                sx={{background: '#9bddf6', color: 'black'}}
                 endIcon={<KeyboardDoubleArrowDownIcon />}
             >
                 MAPAS

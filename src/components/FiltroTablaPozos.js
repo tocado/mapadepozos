@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { List, ListItem, ListItemButton, ListItemIcon, MenuItem, Select } from "@mui/material";
-import WaterIcon from '@mui/icons-material/Water';
+import MyLocationIcon from '@mui/icons-material/MyLocation';
 
 const FiltroTablaPozos = (props) => {
     const { data, setTablaPozos, cambioProvinciaL, provv } = props;
@@ -38,11 +38,11 @@ const FiltroTablaPozos = (props) => {
     useEffect(() => {
         setProvinciaSeleccionada(false)
     }, [provv])
-    return <List>
+    return <List sx={{mb:0,'& .MuiTextField-root': { width: '85%'},}}>
         <ListItem disablePadding>
             <ListItemButton>
                 <ListItemIcon>
-                    <WaterIcon />
+                    <MyLocationIcon />
                 </ListItemIcon>
                 <Select
                     id="label-provincias"
@@ -51,6 +51,7 @@ const FiltroTablaPozos = (props) => {
                     defaultValue={false}
                     size="small"
                     value={provinciaSeleccionada}
+                    sx={{width:'100%', ml:-3,mr:1}}
                 >
                     <MenuItem selected={true} value={false} label="Provincias">Provincias</MenuItem>
                     {provincias.map((r, i) => {
@@ -62,13 +63,14 @@ const FiltroTablaPozos = (props) => {
             </ListItemButton>
         </ListItem>
         {provinciaSeleccionada !== false? <ListItem>
-            <ListItemButton>
+            <ListItemButton sx={{ml:-2}}>
                 <Select
                     id="label-departamentos"
                     label="Departamentos"
                     onChange={cambioDepartamento}
                     defaultValue={false}
                     size="small"
+                    sx={{width:'100%'}}                    
                 >
                     <MenuItem selected={true} value={false} label="Departamentos">Departamentos</MenuItem>
                     {departamentos.map((r, i) => {

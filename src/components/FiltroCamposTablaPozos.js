@@ -72,10 +72,11 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
             <Grid container spacing={1} justifyContent="flex-start"
                 sx={{
                     '& .MuiTextField-root': { width: '85%', marginBottom: 1 },
-                    m: 1,
+                    ml:1,
+                    pr:1,
                 }}>
-                <Grid item xs={12} className="filtroPozosCampo">
-                    <FormControl sx={{ minWidth: 100 }} size="small">
+                <Grid item xs={12}>
+                    <FormControl sx={{ minWidth: '85%' }} size="small">
                         <InputLabel id="label-usos">Uso</InputLabel>
                         <Select
                             labelId="label-usos"
@@ -85,6 +86,7 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                             defaultValue=""
                             size="small"
                             value={filtro.Uso}
+                            sx={{width:'100%'}}
                         >
                             <MenuItem value={""} label="todos">Todos</MenuItem>
                             {usos.map((r, i) => {
@@ -193,8 +195,8 @@ const FiltroCamposTablaPozos = ({ datos, setFiltroDatos }) => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} className='filtroPozosCampo'>
-                    <Button onClick={() => adecuarFiltro(filtro)}>
-                        Filtrar
+                    <Button onClick={() => adecuarFiltro(filtro)} variant='contained' sx={{width:'85%', color: 'black', background: '#9bddf6'}}>
+                        Aplicar Filtros
                     </Button>
                 </Grid>
                 {/* <Grid item xs={12} className="filtroPozosCampo">

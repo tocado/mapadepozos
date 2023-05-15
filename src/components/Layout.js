@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import MapView from './MapView'
 import OpacityIcon from '@mui/icons-material/Opacity';
 import WaterIcon from '@mui/icons-material/Water';
-import MyLocationIcon from '@mui/icons-material/MyLocation';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import { Grid, Paper } from '@mui/material';
 import * as topojson from "topojson-client";
 import dataPozos from '../assets/pozos.json'
@@ -362,7 +362,6 @@ function Layout(props) {
             {dataPozos.length > 0 ? <FiltroTablaPozos cambioProvinciaL={cambioProvincia} data={dataPozos} setTablaPozos={setTablaPozos} provv={filtroProv} /> : <></>}
             {tablaPozos.length ?
                 <>
-                    <Divider />
                     <FiltroCamposTablaPozos datos={tablaPozos} setFiltroDatos={setFiltroDatos} />
                 </> :
                 <></>
@@ -388,7 +387,7 @@ function Layout(props) {
                             }}>
                                 <ListItemButton>
                                     <ListItemIcon>
-                                        <MyLocationIcon />
+                                        <RefreshIcon />
                                     </ListItemIcon>
                                     <ListItemText primary={'Restablecer Filtro'} />
                                 </ListItemButton>
@@ -417,7 +416,7 @@ function Layout(props) {
                 <Toolbar>
                     <Grid container spacing={0} justifyContent="space-between" alignItems="center">
                         <Grid item xs={8}>
-                            <Typography variant="h4" noWrap sx={{ color: '#9bddf6' }}>
+                            <Typography variant="h4" noWrap sx={{ color: '#37bbed' }}>
                                 SIAS - Sistema de información de aguas subterr&aacute;neas
                             </Typography>
                         </Grid>
