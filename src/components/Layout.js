@@ -16,16 +16,19 @@ import MapView from './MapView'
 import OpacityIcon from '@mui/icons-material/Opacity';
 import WaterIcon from '@mui/icons-material/Water';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
-import { Grid } from '@mui/material';
+import { Grid, Paper } from '@mui/material';
 import * as topojson from "topojson-client";
 import dataPozos from '../assets/pozos.json'
 import provincias from "./provincias.json"
 import ListadoDatos from "./ListadoDatos"
-import logo from '../assets/logo.jpg'
+import logoCohife from '../assets/logo_COHIFE_transparente.png'
+import logoMinisterio from '../assets/logo_MINISTERIO.png'
 import FiltroTablaPozos from './FiltroTablaPozos'
 import FiltroCamposTablaPozos from "./FiltroCamposTablaPozos";
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import CircleIcon from '@mui/icons-material/Circle'
+import MenuCambioMapa from "./MenuCambioMapa";
 
 const drawerWidth = 240;
 
@@ -210,7 +213,8 @@ function Layout(props) {
             ]
         }
     })
-    const [pozosFiltrados, setPozosFiltrados] = useState(pozos)
+    //const [pozosFiltrados, setPozosFiltrados] = useState(pozos)
+    const [pozosFiltrados, setPozosFiltrados] = useState([])
     const provinciasLocation = [
         { nombre: "CABA", pos: [-34.6038, -58.4253], z: 12 },
         { nombre: "Buenos Aires", pos: [-37.3003, -59.2601], z: 6 },
@@ -324,33 +328,7 @@ function Layout(props) {
     }
     const drawer = (
         <div>
-            {/* <Toolbar /> */}
-            <img
-                src={logo}
-                width={drawerWidth}
-                style={{
-                    paddingLeft: "40px",
-                    paddingRight: "40px",
-                    paddingTop: "20px",
-                    margin: "0px",
-                }}
-                alt="logo"
-            />
-            <List>
-                <ListItem disablePadding onClick={() => {
-                    setProvinciasFiltradas(provincias)
-                    setCuencasFiltradas(cuencas)
-                    setPozosFiltrados(pozos)
-                    map.setView([-38.5094661, -73.8996827], 4);
-                }}>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <MyLocationIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={'Restablecer Filtro'} />
-                    </ListItemButton>
-                </ListItem>
-            </List>
+            <Toolbar /><Toolbar />
             <Divider />
             <List>
                 <ListItem disablePadding onClick={() => {
@@ -395,38 +373,64 @@ function Layout(props) {
     const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'grid' }}>
             <CssBaseline />
-            <AppBar
-                position="fixed"
-                sx={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` },
-                }}
-            >
+            <Box sx={{ display: 'grid', flexGrow: 1, zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+                <Toolbar />
+                <Toolbar sx={{ p: 0, m: 0, }}>
+                    <Box sx={{ p: 0, }}>
+                        <List sx={{ ml: -3, pr: 3 }}>
+                            <ListItem disablePadding onClick={() => {
+                                setProvinciasFiltradas(provincias)
+                                setCuencasFiltradas(cuencas)
+                                setPozosFiltrados(pozos)
+                                map.setView([-38.5094661, -73.8996827], 4);
+                            }}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <MyLocationIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={'Restablecer Filtro'} />
+                                </ListItemButton>
+                            </ListItem>
+                        </List>
+                    </Box>
+                    <Box sx={{ flexGrow: 1, display: 'grid' }}>
+                        <Typography variant="body1" align="right" sx={{ pr: 4 }}>
+                            Concentración de número de pozos en el área:
+                        </Typography>
+                    </Box>
+                    <Box sx={{ flexGrow: 1, display: 'grid' }}>
+                        <Typography variant="body1" align="left">
+                            <CircleIcon fontSize="smallest" sx={{ color: "#f2994a" }} /> Mayor
+                            <CircleIcon fontSize="smallest" sx={{ color: "#f2c94c" }} /> Intermedio
+                            <CircleIcon fontSize="smallest" sx={{ color: "#27ae60" }} /> Poca
+                        </Typography>
+                    </Box>
+                    <Box sx={{ flexGrow: 0, display: 'grid' }}>
+                        <MenuCambioMapa cambioMapa={cambioMapa} />
+                    </Box>
+                </Toolbar>
+            </Box>
+
+            <AppBar sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: 'white' }}>
                 <Toolbar>
                     <Grid container spacing={0} justifyContent="space-between" alignItems="center">
-                        <Grid item xs={10}>
-                            <Typography variant="h6" noWrap component="div">
+                        <Grid item xs={8}>
+                            <Typography variant="h4" noWrap sx={{ color: '#9bddf6' }}>
                                 SIAS - Sistema de información de aguas subterr&aacute;neas
                             </Typography>
                         </Grid>
-                        <Grid item xs={2} sx={{ textAlign: "right" }}>
-                                <Select
-                                    sx={{ background: 'white'}}
-                                    value={urlMapa}
-                                    size="small"
-                                    onChange={cambioMapa}
-                                >
-                                    <MenuItem value={'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'}>OSM</MenuItem>
-                                    <MenuItem value={'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'}>Imagenes Satelitales Esri</MenuItem>
-                                    <MenuItem value={'https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}'}>Mapa Topografico Esri</MenuItem>
-                                    <MenuItem value={'https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png'}>Argenmap Base</MenuItem>
-                                    <MenuItem value={'https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_gris@EPSG%3A3857@png/{z}/{x}/{-y}.png'}>Argenmap Gris</MenuItem>
-                                    <MenuItem value={'https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/argenmap_oscuro@EPSG%3A3857@png/{z}/{x}/{-y}.png'}>Argenmap Oscuro</MenuItem>
-                                    <MenuItem value={'https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_topo@EPSG%3A3857@png/{z}/{x}/{-y}.png'}>Argenmap Topografico</MenuItem>
-                                    
-                                </Select>
+                        <Grid item xs={1} sx={{ textAlign: "right" }}>
+                            <img src={logoMinisterio} height="55" />
+                        </Grid>
+                        <Grid item xs={2} sx={{ textAlign: "center" }}>
+                            <Typography variant="body1" sx={{ fontWeight: 'bold', fontSize: 12, color: 'black' }}>
+                                Secretaria de infraestructura y<br /> Política hidrica
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={1} sx={{ textAlign: "right" }}>
+                            <img src={logoCohife} height="35" />
                         </Grid>
                     </Grid>
                 </Toolbar>
@@ -434,7 +438,7 @@ function Layout(props) {
             <Box
                 component="nav"
                 sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-                aria-label="mailbox folders"
+                aria-label="Opciones"
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Drawer
@@ -455,19 +459,18 @@ function Layout(props) {
                 <Drawer
                     variant="permanent"
                     sx={{
-                        display: { xs: 'none', sm: 'block' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        width: drawerWidth,
+                        flexShrink: 0,
+                        [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
                     }}
-                    open
                 >
                     {drawer}
                 </Drawer>
             </Box>
             <Box
                 component="main"
-                sx={{ flexGrow: 1, pt: 0, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+                sx={{ flexGrow: 1, pt: 0, ml: `${drawerWidth}px`, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
-                <Toolbar />
                 <Grid container spacing={5} justifyContent="space-around">
                     <Grid item xs={12}>
                         <MapView mapa={map} pozosPorCuenca={pozosPorCuenca} cuencas={cuencasFiltradas} setMap={setMap} markers={pozosFiltrados} provincias={provinciasFiltradas} />
@@ -478,7 +481,7 @@ function Layout(props) {
                     </Grid>
                 </Grid>
             </Box>
-        </Box>
+        </Box >
     );
 }
 
