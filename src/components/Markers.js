@@ -30,7 +30,14 @@ const Markers = (props) => {
       // </Circle >
     ));
   }
-  return <MarkerClusterGroup maxClusterRadius={60} disableClusteringAtZoom={6}>{TmpMarkers}</MarkerClusterGroup>;
+  const progressLoading = (p,t,tiempo) => {
+    if (p===t) {
+      console.warn("Finalizada la carga!")
+    } else {
+      console.log("Cargando...")
+    }
+  }
+  return <MarkerClusterGroup maxClusterRadius={60} _disableClusteringAtZoom={8} chunkedLoading={true} chunkProgress={progressLoading}>{TmpMarkers}</MarkerClusterGroup>;
 };
 
 export default Markers;

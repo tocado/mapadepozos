@@ -398,7 +398,7 @@ function Layout(props) {
                         <Typography variant="body1" align="left">
                             <CircleIcon fontSize="smallest" sx={{ color: "#f2994a" }} /> Mayor
                             <CircleIcon fontSize="smallest" sx={{ color: "#f2c94c" }} /> Intermedio
-                            <CircleIcon fontSize="smallest" sx={{ color: "#27ae60" }} /> Poca
+                            <CircleIcon fontSize="smallest" sx={{ color: "#27ae60" }} /> Menor
                         </Typography>
                     </Box>
                     <Box sx={{ flexGrow: 0, display: 'grid' }}>
@@ -412,7 +412,7 @@ function Layout(props) {
                     <Grid container spacing={0} justifyContent="space-between" alignItems="center">
                         <Grid item xs={8}>
                             <Typography variant="h4" noWrap sx={{ color: '#37bbed' }}>
-                                SIAS - Sistema de información de aguas subterr&aacute;neas
+                                SIAS - Sistema de Información de Aguas Subterr&aacute;neas
                             </Typography>
                         </Grid>
                         <Grid item xs={1} sx={{ textAlign: "right" }}>

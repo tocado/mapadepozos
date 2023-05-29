@@ -271,9 +271,9 @@ export default function ListadoDatos({ data, FiltroDataPozos }) {
                                         >
                                             <Stack direction="row" alignItems="center" gap={1}>
                                                 <InfoIcon sx={{ fontSize: 15 }} />
-                                                <typography xclassName="inlinenowrap">{column.label}</typography>
+                                                <span>{column.label}</span>
                                             </Stack>
-                                        </HtmlTooltip> : <typography>{column.label}</typography>
+                                        </HtmlTooltip> : <span>{column.label}</span>
                                         }
                                         {orderBy === column.id ? (
                                             <Box component="span" sx={visuallyHidden}>
