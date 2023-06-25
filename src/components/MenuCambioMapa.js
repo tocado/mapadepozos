@@ -6,7 +6,6 @@ import Menu from '@mui/material/Menu';
 
 export default function MenuCambioMapa({ cambioMapa }) {
     const mapas = [
-        { url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', name: 'OSM' },
         { url: 'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', name: 'Imagenes Satelitales Esri' },
         { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', name: 'Mapa Topografico Esri' },
         { url: 'https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png', name: 'Argenmap Base' },
