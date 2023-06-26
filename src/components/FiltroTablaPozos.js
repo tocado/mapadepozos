@@ -19,11 +19,11 @@ const FiltroTablaPozos = (props) => {
         setPozosFiltrados(filtroDepa)
         setTablaPozos(filtroDepa)
         setProvinciaSeleccionada(e.target.value)
-        return cambioProvinciaL({Provincia:e.target.value})
+        return cambioProvinciaL({ Provincia: e.target.value })
     }
     const cambioDepartamento = (e) => {
         const PozosFinal = pozosFiltrados.filter((d) => d.Provincia === provinciaSeleccionada && d.Departamento === e.target.value)
-        cambioProvinciaL({Provincia:provinciaSeleccionada, Departamento: e.target.value})
+        cambioProvinciaL({ Provincia: provinciaSeleccionada, Departamento: e.target.value })
         if (PozosFinal.length > 0) {
             return setTablaPozos(PozosFinal)
         }
@@ -38,7 +38,7 @@ const FiltroTablaPozos = (props) => {
     useEffect(() => {
         setProvinciaSeleccionada(false)
     }, [provv])
-    return <List sx={{mb:0,'& .MuiTextField-root': { width: '85%'},}}>
+    return <List sx={{ mb: 0, '& .MuiTextField-root': { width: '85%' }, }}>
         <ListItem disablePadding>
             <ListItemButton>
                 <ListItemIcon>
@@ -51,7 +51,7 @@ const FiltroTablaPozos = (props) => {
                     defaultValue={false}
                     size="small"
                     value={provinciaSeleccionada}
-                    sx={{width:'100%', ml:-3,mr:1}}
+                    sx={{ width: '100%', ml: -3, mr: 1 }}
                 >
                     <MenuItem selected={true} value={false} label="Provincias">Provincias</MenuItem>
                     {provincias.map((r, i) => {
@@ -62,15 +62,15 @@ const FiltroTablaPozos = (props) => {
                 </Select>
             </ListItemButton>
         </ListItem>
-        {provinciaSeleccionada !== false? <ListItem>
-            <ListItemButton sx={{ml:-2}}>
+        <ListItem>
+            <ListItemButton sx={{ ml: -2 }}>
                 <Select
                     id="label-departamentos"
                     label="Departamentos"
                     onChange={cambioDepartamento}
                     defaultValue={false}
                     size="small"
-                    sx={{width:'100%'}}                    
+                    sx={{ width: '100%' }}
                 >
                     <MenuItem selected={true} value={false} label="Departamentos">Departamentos</MenuItem>
                     {departamentos.map((r, i) => {
@@ -80,8 +80,7 @@ const FiltroTablaPozos = (props) => {
                     })}
                 </Select>
             </ListItemButton>
-        </ListItem> : <></>
-        }
+        </ListItem>
     </List>
 };
 

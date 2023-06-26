@@ -355,12 +355,7 @@ function Layout(props) {
             </List>
             <Divider />
             {dataPozos.length > 0 ? <FiltroTablaPozos cambioProvinciaL={cambioProvincia} data={dataPozos} setTablaPozos={setTablaPozos} provv={filtroProv} /> : <></>}
-            {tablaPozos.length ?
-                <>
-                    <FiltroCamposTablaPozos datos={tablaPozos} setFiltroDatos={setFiltroDatos} />
-                </> :
-                <></>
-            }
+            <FiltroCamposTablaPozos datos={tablaPozos} setFiltroDatos={setFiltroDatos} />
         </div>
     );
 
@@ -420,7 +415,7 @@ function Layout(props) {
                             </Typography>
                         </Grid>
                         <Grid item xs={1} sx={{ textAlign: "right" }}>
-                            <img src={logoMinisterio} height="55" alt="logo del ministerio"/>
+                            <img src={logoMinisterio} height="55" alt="logo del ministerio" />
                         </Grid>
                         <Grid item xs={2} sx={{ textAlign: "center" }}>
                             <Typography variant="body1" sx={{ fontWeight: 'bold', fontSize: 12, color: 'black' }}>
@@ -428,7 +423,7 @@ function Layout(props) {
                             </Typography>
                         </Grid>
                         <Grid item xs={1} sx={{ textAlign: "right" }}>
-                            <img src={logoCohife} height="35" alt="logo cohife"/>
+                            <img src={logoCohife} height="35" alt="logo cohife" />
                         </Grid>
                     </Grid>
                 </Toolbar>
