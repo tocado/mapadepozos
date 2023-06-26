@@ -292,7 +292,6 @@ function Layout(props) {
         //debugger
         verPozos(true)
         verCuencas(false)
-
     };
     const pozosPorCuenca = (c) => {
         //cuencas
@@ -328,8 +327,8 @@ function Layout(props) {
             <List>
                 <ListItem disablePadding onClick={() => {
                     //document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(3) > span > input").click()
-                    setProvinciasFiltradas({})
                     setCuencasFiltradas(cuencas)
+                    setCuencasFiltradas({})
                     verCuencas(true)
                     verPozos(false)
                     setFiltroProv(Math.random())
@@ -375,9 +374,13 @@ function Layout(props) {
                     <Box sx={{ p: 0, }}>
                         <List sx={{ ml: -3, pr: 3 }}>
                             <ListItem disablePadding onClick={() => {
-                                setProvinciasFiltradas(provincias)
-                                setCuencasFiltradas(cuencas)
+                                // setProvinciasFiltradas(provincias)
+                                setProvinciasFiltradas({})
+                                //setCuencasFiltradas(cuencas)
+                                setCuencasFiltradas({})
+                                setTablaPozos([])
                                 setPozosFiltrados(pozos)
+                                setFiltroProv(Math.random())
                                 map.setView([-38.5094661, -73.8996827], 4);
                             }}>
                                 <ListItemButton>
