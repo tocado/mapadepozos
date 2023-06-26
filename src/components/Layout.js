@@ -327,9 +327,10 @@ function Layout(props) {
             <List>
                 <ListItem disablePadding onClick={() => {
                     //document.querySelector("div.leaflet-control-layers-overlays > label:nth-child(3) > span > input").click()
-                    setCuencasFiltradas(cuencas)
-                    setCuencasFiltradas({})
-                    verCuencas(true)
+                    if (!capaActivada.cuencas) {
+                        setCuencasFiltradas(cuencas)
+                    }
+                    verCuencas(!capaActivada.cuencas)
                     verPozos(false)
                     setFiltroProv(Math.random())
                     //debugger
