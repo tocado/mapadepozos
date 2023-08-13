@@ -310,12 +310,15 @@ export default function ListadoDatos({ data, FiltroDataPozos }) {
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25, 100]}
                 component="div"
-                count={data.length}
+                count={stableSort(dataFinal, getComparator(order, orderBy)).length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
+            <Typography sx={{px:3}}>
+                {stableSort(dataFinal, getComparator(order, orderBy)).length} Pozos totales
+            </Typography>
         </Paper>
     );
 }
