@@ -16,7 +16,7 @@ import MapView from './MapView'
 import OpacityIcon from '@mui/icons-material/Opacity';
 import WaterIcon from '@mui/icons-material/Water';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { Grid } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid } from '@mui/material';
 import * as topojson from "topojson-client";
 import dataPozos from '../assets/pozos.json'
 import provincias from "./provincias.json"
@@ -31,6 +31,7 @@ import MenuCambioMapa from "./MenuCambioMapa";
 const drawerWidth = 240;
 
 function Layout(props) {
+    const [disclaimer, setDisclaimer] = useState(true)
     const [map, setMap] = useState(false)
     const [capaActivada, setCapaActivada] = useState({
         cuencas: false,
@@ -474,6 +475,55 @@ function Layout(props) {
                     </Grid>
                 </Grid>
             </Box>
+            <Dialog
+                open={disclaimer}
+                onClose={()=>setDisclaimer(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"AVISO"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        <Typography sx={{mb:2}}>
+                            El Sistema de Información de Aguas Subterráneas – SIAS, ha sido desarrollado en el marco del
+                            Plan Nacional Federal de Aguas Subterráneas que implementa y ejecuta la Secretaría de
+                            Infraestructura y Política Hídrica dependiente del Ministerio de Obras Públicas, y el Consejo
+                            Hídrico Federal – COHIFE, con el apoyo técnico de la Comisión de Aguas Subterráneas del
+                            organismo federal.
+                        </Typography>
+                        <Typography sx={{mb:2}}>
+                            Este sitio web está vinculado a la página de COHIFE, según los términos y condiciones que se
+                            expresan a continuación.
+                        </Typography>
+                        <Typography sx={{mb:2}}>
+                            El SIAS contiene datos de perforaciones en todo el territorio de la República Argentina,
+                            provistos formalmente por las jurisdicciones y otras fuentes nacionales, provinciales y
+                            municipales.
+                        </Typography>
+                        <Typography sx={{mb:2}}>
+                            Los datos disponibles corresponden a: localización, parámetros hidrodinámicos y usos de las
+                            aguas subterráneas.
+                        </Typography>
+                        <Typography sx={{mb:2}}>
+                            Los contenidos vigentes están sujetos a las modificaciones que se produzcan a partir de las
+                            actualizaciones periódicas del sistema.
+                        </Typography>
+                        <Typography sx={{mb:2}}>
+                            La información publicada constituye una herramienta de gestión, la Secretaría de
+                            Infraestructura y Política Hídrica de la Nación y el COHIFE, no serán responsables por los
+                            productos, subproductos o decisiones que se generen por terceros a partir de la utilización de
+                            estos datos.
+                        </Typography>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={()=>setDisclaimer(false)} autoFocus>
+                        Aceptar
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Box >
     );
 }
